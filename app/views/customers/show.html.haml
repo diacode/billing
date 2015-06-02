@@ -1,0 +1,91 @@
+#customer_profile
+  %header
+    %h1.pull-left Cliente
+
+    .actions.pull-right
+      = link_to edit_customer_path(@customer), class: 'btn btn-lg btn-primary' do
+        Editar cliente
+
+    .clearfix
+
+  .container.regular-view-wrapper
+    .media.project-title
+      .pull-left
+        = image_tag @customer.picture.url, width: 100, height: 100, class: 'media-object img-circle'
+      .media-body
+        %h1.media-heading= customer.name
+
+    .portlet.tabbed
+      %ul.nav.nav-tabs
+        %li.active= link_to "General", "#general_tab", data: {toggle: 'tab'}
+        %li= link_to "Proyectos", "#projects_tab", data: {toggle: 'tab'}
+        %li= link_to "Facturación", "#billing_tab", data: {toggle: 'tab'}
+
+      .tab-content
+        #general_tab.tab-pane.active
+          %h3 Datos de facturación
+          %p= simple_format customer.billing_info
+
+          %h3 Correo electrónico
+          %p= customer.email
+        #projects_tab.tab-pane
+          .row
+            .col-md-12
+              %table.table.table-bordered.table-striped
+                %thead
+                  %tr
+                    %th.name Nombre
+                    %th.date Comienzo
+                    %th.date Fin
+                    %th.centered Dedicación
+                    %th.centered Facturado
+
+                %tbody
+                  - if @projects.any?
+                    - @projects.each do |project|
+                      %tr
+                        %td= link_to project.name, project
+                        %td= project.start ? l(project.start.to_date) : "-"
+                        %td= project.ending ? l(project.ending.to_date) : "-"
+                        %td.number #{project.hours_spent} horas
+                        %td.number= number_to_currency project.invoiced
+
+                  - else
+                    %tr
+                      %td{colspan: 5} No hay proyectos asociados a este cliente.
+
+                - if @projects.any?
+                  %tfoot.total-footer
+                    %tr
+                      %td{colspan: 3} Total:
+                      %td.number #{@projects.to_a.sum(&:hours_spent)} horas
+                      %td.number= number_to_currency @projects.to_a.sum(&:invoiced)
+
+        #billing_tab.tab-pane
+          .row
+            .col-md-12
+              %table.table.table-bordered.table-striped
+                %thead
+                  %tr
+                    %th.code Código
+                    %th.date Emisión
+                    %th.status Estado
+                    %th.centered Importe
+
+                %tbody
+                  - if @invoices.any?
+                    - @invoices.each do |invoice| 
+                      %tr
+                        %td= link_to invoice.code, invoice
+                        %td= l invoice.created_at.to_date
+                        %td= invoice.paid ? 'Pagada' : 'Pendiente'
+                        %td.number= number_to_currency invoice.total
+                  - else 
+                    %tr
+                      %td{colspan: 4} No hay facturas asociadas a este cliente.
+
+                - if @invoices.any?
+                  %tfoot.total-footer
+                    %tr
+                      %td{colspan: 3} Total:
+                      %td.number= number_to_currency @invoices.to_a.sum(&:total)

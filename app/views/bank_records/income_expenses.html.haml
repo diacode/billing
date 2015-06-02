@@ -1,0 +1,14 @@
+#balance
+  = render 'header'
+
+  .container.regular-view-wrapper
+    .row
+      .grid-wrapper.col-md-12
+        .portlet
+          #income_expenses_chart.d3-chart{data: {records: @bank_records.to_json}}
+
+    .row
+      .col-md-12
+        = link_to "« Ir atrás", income_expenses_bank_records_path(last_month: @previous_month), class: 'pull-left btn btn-primary'
+        - unless @next_month.nil?
+          = link_to "Ir adelante »", income_expenses_bank_records_path(last_month: @next_month), class: 'pull-right btn btn-primary'

@@ -1,0 +1,46 @@
+default: &default
+  time_tracking:
+    provider: <%= ENV['TIME_TRACKING_PROVIDER'] %>
+    api_key: <%= ENV['TIME_TRACKING_API_KEY'] %>
+
+  notifications:
+    provider: <%= ENV['NOTIFICATIONS_PROVIDER'] %>
+    username: <%= ENV['NOTIFICATIONS_USERNAME'] %> 
+    webhook_url: <%= ENV['NOTIFICATIONS_WEBHOOK_URL'] %> 
+    emoji: <%= ENV['NOTIFICATIONS_EMOJI'] %> 
+    token: <%= ENV['NOTIFICATIONS_TOKEN'] %>
+    room: <%= ENV['NOTIFICATIONS_ROOM'] %>
+
+  bank_account:
+    entity:  <%= ENV['NOTIFICATIONS_BANK_ACCOUNT_ENTITY'] %>
+    username: <%= ENV['NOTIFICATIONS_BANK_ACCOUNT_USERNAME'] %>
+    password: <%= ENV['NOTIFICATIONS_BANK_ACCOUNT_PASSWORD'] %>
+    birthday: <%= ENV['NOTIFICATIONS_BANK_ACCOUNT_BIRTHDAY'] %>
+
+  invoice:
+    last_legacy_id: <%= ENV['INVOICE_LAST_LEGACY_ID'] %>
+    company_info: |
+      YOUR COMPANY S.L.
+      Address, 1
+      XXXXX Awesomeland 
+      City, Country
+      CIF: B-XXXXXXXXX 
+      VAT: ESBXXXXXXXX
+    
+    payment_info: |
+      BANK ACCOUNT: XXXX XXXX XX XXXXXXXXXX
+      IBAN: ESXXXXXXXXXXXXXXXXXXXXXX
+      SWIFT: BBVAESMMXXX
+      BANK: IRON BANK S.A. 
+      BANK ADDRESS:
+      Lord Stark Street, 37
+      12345 Winterfell, Westeros
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default

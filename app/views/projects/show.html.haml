@@ -1,0 +1,151 @@
+#project_detail
+  %header
+    %h1.pull-left Detalle de proyecto
+
+    .actions.pull-right
+      = link_to edit_project_path(@project), class: 'btn btn-lg btn-primary' do
+        Editar proyecto
+
+    .clearfix
+
+  .container.regular-view-wrapper
+    .media.project-title
+      .pull-left
+        = image_tag @project.customer.picture.url, width: 100, height: 100, class: 'media-object img-circle'
+      .media-body
+        %h2.media-heading= project.name
+        .text-muted Cliente: #{project.customer.name}
+
+    .portlet.tabbed
+      %ul.nav.nav-tabs
+        %li.active= link_to "General", "#general_tab", data: {toggle: 'tab'}
+        %li= link_to "Tiempo", "#timing_tab", data: {toggle: 'tab'}
+        %li= link_to "Facturación", "#billing_tab", data: {toggle: 'tab'}
+
+      .tab-content
+        #general_tab.tab-pane.active
+          .row
+            .col-md-8
+              %h3 Descripción del proyecto
+              - if !@project.description.blank?
+                = markdown(@project.description).html_safe
+              - else
+                %p.text-muted Descripción no incluída.
+
+              %h3 Stack
+
+              - if !@project.stack.blank?
+                = markdown(project.stack).html_safe
+              - else
+                %p.text-muted Stack no incluído.
+
+            .col-md-4
+              .panel.panel-default
+                %table.table.table-bordered.table-striped
+                  %tbody
+                    %tr
+                      %td Inicio
+                      %td= project.start
+
+                    %tr
+                      %td Fin
+                      %td= project.ending
+
+                    %tr
+                      %td Presupuesto
+                      %td= project.budget
+
+                    %tr
+                      %td Ratio
+                      %td= project.ratio
+
+        #timing_tab.tab-pane
+          .row
+            #deadline_wrapper.col-md-6
+              - if project.start && project.ending
+                %h4.pull-left Deadline
+                %h5.pull-right{class: project_deadline_class(project.days_left)}
+                  = project_deadline(project.days_left)
+                .clearfix
+
+                .progress.deadline
+                  .progress-bar{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "#{@project.percent_elapsed}", role: "progressbar", style: "width: #{@project.percent_elapsed}%;"}
+
+                .pull-left.start-date= project.start
+                .pull-right.end-date= project.ending
+
+            #time_counters.col-md-6
+              %i.icon-clock
+
+              .counter
+                .counter-heading Presupuestado
+                .counter-number= project.hours_agreed
+                .counter-footer horas
+
+              .counter
+                .counter-heading Consumido
+                .counter-number= project.hours_spent
+                .counter-footer horas
+
+              .counter
+                .counter-heading Desviación
+                .counter-number -
+                .counter-footer horas
+
+          .row
+            .col-md-12
+              %h3 Últimos registros de tiempo
+
+              %table#time_records.table.table-bordered.table-striped
+                %thead
+                  %tr
+                    %th.date Fecha
+                    %th.subject Concepto
+                    %th.length Duración
+
+                %tbody
+                  %tr
+                    %td{colspan: 3} Work in progress
+
+        #billing_tab.tab-pane
+          .row
+            .col-md-8
+              %table.table.table-bordered.table-striped
+                %thead
+                  %tr
+                    %th Código
+                    %th Emisión
+                    %th Importe
+                    %th Estado
+
+                %tbody
+                  - if @invoices.any?
+                    - @invoices.each do |invoice|
+                      %tr
+                        %td= link_to invoice.code, invoice
+                        %td= l invoice.created_at.to_date, format: :long
+                        %td= number_to_currency invoice.total
+                        %td= invoice.paid ? 'Pagada' : 'Pendiente'
+                  - else
+                    %tr
+                      %td{colspan: 4} No se encontraron facturas
+
+              = link_to invoices_path({invoice: {customer_id: @project.customer_id}}), method: 'post', class: 'btn btn-primary' do
+                %i.icon-plus
+                Nueva factura
+
+            .col-md-4
+              .panel.panel-default
+                %table.table.table-bordered.table-striped
+                  %tbody
+                    %tr
+                      %td Facturado
+                      %td= number_to_currency @invoiced
+
+                    %tr
+                      %td Cobrado
+                      %td= number_to_currency @paid
+
+                    %tr
+                      %td Pendiente
+                      %td= number_to_currency @pending

@@ -1,0 +1,8 @@
+%header
+  %h1.pull-left Balance
+  %ul.pull-left.nav.nav-pills.subnav
+    %li{class: ('active' if params[:action] == 'index')}= link_to "Movimientos", bank_records_path
+    %li{class: ('active' if params[:action] == 'evolution')}= link_to "Evolución Saldo", evolution_bank_records_path
+    %li{class: ('active' if params[:action] == 'income_expenses')}= link_to "Ingresos/Gastos", income_expenses_bank_records_path
+
+  .clearfix

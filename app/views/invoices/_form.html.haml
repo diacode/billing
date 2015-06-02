@@ -1,0 +1,10 @@
+= simple_form_for @invoice, turboboost: true, html: {class: 'form-horizontal entity-form', id: 'invoice_form', data: {entity: 'invoice'}} do |f|
+  .row
+    .col-md-6
+      = f.association :customer, prompt: 'Select a customer'
+
+  .row
+    .col-sm-12
+      .form-actions
+        = f.submit 'Continuar', class: 'btn btn-lg btn-primary'
+        = link_to 'Cancelar', invoices_path, class: 'btn btn-lg btn-default'

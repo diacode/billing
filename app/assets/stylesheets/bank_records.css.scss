@@ -1,0 +1,134 @@
+#balance{
+  .grid-wrapper{
+    margin-top: 20px;
+  }
+
+  &.index{
+    ul.filters, .date-filter{
+      display: inline-block;
+    }
+
+    .date-filter{
+      border-right: 1px solid #ccc;
+    }
+  }
+
+  #bank_search_form{
+    width: 300px;
+  }
+
+  table{
+    .col-date, .col-amount, .col-balance{
+      width: 15%;
+    }
+
+    th{
+      &.col-amount, &.col-balance{
+        text-align: center;
+      }
+    }    
+
+    td{
+      &.col-amount, &.col-balance{
+        text-align: right;
+      }
+
+      &.col-actions{
+        text-align: center;
+      }
+    }
+  }
+
+  .d3-chart{
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 14px;
+  }
+
+  #evolution_chart{
+    width: 100%;
+
+    .axis path,
+    .axis line {
+      fill: none;
+      stroke: #DADADA;
+      shape-rendering: crispEdges;
+    }
+
+    .x.axis path {
+      // display: none;
+    }
+
+    .y.axis path{
+      display: none;
+    }
+
+    .line {
+      fill: none;
+      stroke: steelblue;
+      stroke-width: 1.5px;
+    }
+
+    .axis .minor line {
+      stroke: #DADADA;
+      stroke-dasharray: 2,2;
+    }
+
+    .dot{
+      // stroke: steelblue;
+      fill: steelblue;
+      stroke-width: 0.5px;
+    }
+
+    .line-helper{
+      stroke-width: 1px;
+      stroke: steelblue;
+    }
+  }
+
+  #income_expenses_chart{
+    width: 100%;
+    
+    .axis path, .axis line {
+      fill: none;
+      stroke: #DADADA;
+      shape-rendering: crispEdges; 
+    }
+
+    rect{
+      &.income{
+        fill: #77dd77;
+        &:hover{
+          fill: darken(#77dd77, 25%);
+        }
+      }
+
+      &.expenses{
+        fill: #ff6961;
+        
+        &:hover{
+          fill: darken(#ff6961, 25%);
+        }
+      }
+    }
+
+    .x.axis path {
+      display: none; 
+    }
+  }
+
+  .tick text{
+    font-size: 12px;
+  }
+}
+
+div.d3-tooltip {
+  position: absolute;
+  text-align: center;
+  padding: 8px;
+  background: #ddd;
+  border: solid 1px #aaa;
+  border-radius: 8px;
+  pointer-events: none;
+  font-family: 'Helvetica Neue', sans-serif;
+  font-size: 12px;
+}

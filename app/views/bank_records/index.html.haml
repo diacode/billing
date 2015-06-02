@@ -1,0 +1,49 @@
+#balance.index
+  = render 'header'
+
+  .container.regular-view-wrapper
+    .row
+      .grid-wrapper.col-md-12
+        = render "shared/flash_notifications"
+
+        .pull-left
+          = form_tag bank_records_path, method: 'get', id: 'bank_search_form' do
+            = text_field_tag :q, params[:q], class: 'form-control', placeholder: 'Search by concept'
+        
+        .pull-right
+          .date-filter
+            = text_field_tag :range, get_current_date_filter, placeholder: 'Selecciona una fecha'
+
+          %ul.filters.list-inline
+            %li= link_to "Todo", bank_records_path, class: ('active' unless params[:filter].present?)
+            %li= link_to "Ingresos", bank_records_path(filter: 'income'), class: ('active' if params[:filter] == 'income')
+            %li= link_to "Gastos", bank_records_path(filter: 'expenses'), class: ('active' if params[:filter] == 'expenses')
+
+        .clearfix
+
+        .portlet
+          %table.table.table-bordered.table-striped
+            %thead
+              %th.col-date Fecha
+              %th.col-concept Concepto
+              %th.col-amount Importe
+              %th.col-balance Saldo
+              %th.col-actions
+
+            %tbody.shadowed
+              - if @bank_records.any?
+                - @bank_records.each do |br|
+                  %tr
+                    %td= l br.operation_at
+                    %td= br.subject
+                    %td.col-amount= number_to_currency br.amount
+                    %td.col-balance= number_to_currency br.balance
+                    %td.col-actions
+                      = link_to bank_record_path(br), method: :delete, class: 'delete-bank-record', data: { confirm: '¿Está seguro?'} do
+                        %i.icon-trash
+              - else              
+                %tr
+                  %td{colspan: 5}
+                    No se encontraron registros
+
+        = paginate @bank_records

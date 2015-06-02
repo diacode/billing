@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+    %title Smithers
+    = stylesheet_link_tag "auth", media: "all", 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    %link{href: "//fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic", rel: "stylesheet", type: "text/css"}
+  %body
+    %header 
+      %h1= link_to "Smithers", root_url
+
+    .container
+      .row
+        .col-md-offset-3.col-md-6
+          #wrapper= yield

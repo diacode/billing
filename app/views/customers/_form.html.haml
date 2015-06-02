@@ -1,0 +1,14 @@
+= simple_form_for @customer, html: {multipart: true, class: 'form-horizontal entity-form customer-form', id: 'customer_form', data:{entity:'customer'}} do |f|
+
+  .row
+    .col-md-6
+      = f.input :name
+      = f.input :billing_info
+      = f.input :email
+      = f.input :picture, as: :file
+
+  .row
+    .col-md-12      
+      .form-actions
+        = f.submit 'Guardar cliente', class: 'btn btn-lg btn-primary'
+        = link_to 'Cancelar', customers_path, class: 'btn btn-lg btn-default'

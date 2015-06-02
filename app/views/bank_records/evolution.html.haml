@@ -1,0 +1,14 @@
+#balance
+  = render 'header'
+
+  .container.regular-view-wrapper
+    .row
+      .grid-wrapper.col-md-12
+
+        .date-filter.pull-right
+          = text_field_tag :range, get_current_date_filter, placeholder: 'Selecciona una fecha'
+
+        .clearfix
+
+        .portlet
+          #evolution_chart.d3-chart{data:{records: @bank_records.to_json}}

@@ -1,0 +1,17 @@
+!!!
+%html
+  %head
+    %title Smithers
+    = stylesheet_link_tag    "application", media: "all", 'data-turbolinks-track' => true
+    = javascript_include_tag "application", 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    %link{href: "//fonts.googleapis.com/css?family=Lato:100,300,400,700,900,100italic,300italic,400italic,700italic,900italic", rel: "stylesheet", type: "text/css"}/
+  %body{data: {class_name: js_class_name}}
+    #wrap
+      = render 'layouts/partials/sidebar'
+      #main
+        .navbar.navbar-inverse
+          .container
+            %p.navbar-text.navbar-right
+              #{current_user.email} | #{link_to("Salir", destroy_user_session_path, method: :delete)} 
+        = yield

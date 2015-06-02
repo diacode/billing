@@ -1,0 +1,20 @@
+#email_modal.modal.fade
+  = form_tag send_email_invoice_url(@invoice.id), method: :post, remote: true, class: 'form-horizontal' do |f|
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+          %h3.modal-title Enviar factura por email
+
+        .modal-body
+          .form-group
+            = label_tag "recipient", "Destinatario", class: 'col-sm-3 control-label'
+            .col-sm-9
+              = email_field_tag "recipient", @invoice.customer.email, class: 'form-control'
+          .form-group
+            = label_tag "message", "Mensaje", class: 'col-sm-3 control-label'
+            .col-sm-9
+              = text_area_tag "message", "", class: 'form-control'
+
+        .modal-footer
+          = submit_tag "Enviar", class: 'btn btn-lg btn-block btn-primary', id: 'send_invoice', data: {disable_with: 'Enviando...'}

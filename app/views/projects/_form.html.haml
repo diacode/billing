@@ -1,0 +1,45 @@
+= simple_form_for @project, turboboost: true, html: {class: 'form-horizontal entity-form project-form', id: 'project_form', data: {entity: 'project'}} do |f|
+  .row
+    .col-md-6
+      = f.input :name
+      = f.input :customer_id, collection: Customer.all.map{ |customer| [customer.name, customer.id]}, include_blank: false
+      = f.input :description, input_html: {rows: 6}
+      = f.input :stack, hint: 'Emplea markdown para representar la lista que compone el stack', input_html: {rows: 6}
+      = f.input :status, collection: Project.statuses.map{ |key, value| [key, key] }, include_blank: false
+      
+    .col-md-6
+      .panel.panel-default
+        .panel-heading
+          %h4
+            %i.icon-calendar
+            Calendario
+        .panel-body
+          = f.input :start, as: :string, input_html: {type: 'date'}
+          = f.input :ending, as: :string, input_html: {type: 'date'}
+
+      .panel.panel-default
+        .panel-heading
+          %h4
+            %i.icon-banknote
+            Presupuesto
+        .panel-body
+          = f.input :budget
+          = f.input :hours_agreed
+          = f.input :ratio
+
+      .panel.panel-default
+        .panel-heading
+          %h4
+            %i.icon-clock
+            Tracking
+        .panel-body
+          = f.input :tracking_service, collection: Project.tracking_services.map{ |key, value| [key, key] }, include_blank: 'Select a service'
+          = f.input :tracking_id
+  .row
+    .col-sm-12
+      .form-actions
+        = f.submit 'Guardar proyecto', class: 'btn btn-lg btn-primary'
+        o
+        = link_to 'Cancelar', projects_path
+
+

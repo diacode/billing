@@ -1,0 +1,57 @@
+= hidden_field_tag :invoice_id, @invoice.id
+
+#invoice_view
+  %header
+    %h1.pull-left Factura
+    .clearfix
+
+  #invoice_actions
+    .container
+      .pull-left
+        = link_to invoice_path(@invoice), method: :delete, data: {confirm: '¿Estás seguro?'}, class: 'btn btn-danger', id: 'delete_invoice' do
+          %i.icon-trash
+          Borrar
+
+      .dropdown
+        = link_to "#", class: 'btn btn-primary', data: {toggle: 'dropdown'} do
+          %i.icon-export
+
+        %ul.dropdown-menu.pull-right
+          %li= link_to "Descargar PDF", invoice_path(@invoice, format: :pdf)
+          %li= link_to "Enviar email", "#email_modal", data: {toggle: 'modal'}
+
+      .dropdown
+        = link_to "Añadir concepto", "#", class: 'btn btn-primary', data: {toggle: 'dropdown'}
+
+        %ul.dropdown-menu.pull-right
+          %li= link_to "Concepto normal", "#", id: "add_regular_item"
+          %li= link_to "Horas facturadas", "#period_modal", class: '', data: {toggle: 'modal'}
+
+  .container.regular-view-wrapper
+    .row.invoice-meta
+      .col-md-6.invoice-code
+        Factura
+        %strong= "##{@invoice.code}"
+
+      .col-md-6.invoice-creation
+        .date
+          %strong Emisión:
+          = text_field_tag :created_at, nil, data: {value: @invoice.created_at.to_date.to_s}
+
+        .date
+          %strong Vencimiento:
+          = text_field_tag :expiration, nil, placeholder: 'Sin indicar', data: {value: (@invoice.expiration.to_s if @invoice.expiration)}
+
+    .row
+      #billing_data.col-md-12
+        %h4 Datos de facturación
+        = simple_format @customer.billing_info
+
+    .row
+      .col-md-12
+        %h3 Detalle de factura
+
+        = react_component "InvoiceTable", {items: @invoice.items, projects: @projects, invoice_id: @invoice.id, vat: @invoice.vat, paid: @invoice.paid}
+
+  = render 'period_modal'
+  = render 'email_modal'

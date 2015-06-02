@@ -1,0 +1,25 @@
+%header
+  %h1.pull-left Clientes
+
+  .actions.pull-right
+    = link_to new_customer_path, class: 'btn btn-lg btn-primary' do
+      %i.icon-plus
+      Nuevo cliente
+
+  .clearfix
+
+.container.regular-view-wrapper
+  .row
+    .col-md-12
+      .portlet
+        %table.table.table-bordered.table-striped
+          %thead
+            %th Nombre
+            %th Proyectos
+
+          %tbody.shadowed
+            = render customers
+
+            - if @customers.empty?
+              %tr
+                %td{colspan: 2} No hay clientes en el sistema.

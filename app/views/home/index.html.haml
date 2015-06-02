@@ -1,0 +1,71 @@
+#dashboard
+  %header
+    %h1.pull-left Dashboard
+    .clearfix
+
+  .container
+    .row
+      .col-md-4
+        #balance
+          %h3 Balance
+          .value= number_to_currency @balance
+  
+      .col-md-4
+        #income
+          %h3 Ingresos del mes
+          .value
+            = number_to_currency @monthly_income
+            - if @pending > 0
+              .pending{title: 'Pendiente de cobro'} 
+                + #{number_to_currency(@pending)}
+      .col-md-4
+        #expenses
+          %h3 Gastos del mes
+          .value= number_to_currency @monthly_expenses
+
+    .row
+      .col-md-6
+        #last_bank_records
+          %h2 Últimos movimientos bancarios
+
+          .portlet
+            %table.table.table-bordered.table-striped
+              %thead
+                %tr
+                  %th Fecha
+                  %th Concepto
+                  %th Importe
+
+              %tbody
+                - @bank_records.each do |br|
+                  %tr{class: ('recent' if br.recent?)}
+                    %td= l br.operation_at
+                    %td= truncate(br.subject, length: 30)
+                    %td.amount= number_to_currency br.amount
+
+      .col-md-6
+        #last_invoices
+          %h2 Últimas facturas
+
+          .portlet
+            %table.table.table-bordered.table-striped
+              %thead
+                %tr
+                  %th Código
+                  %th Cliente
+                  %th Emision
+                  %th Vencimiento
+                  %th Importe
+
+              %tbody
+                - if @invoices.any?
+                  - @invoices.each do |invoice|
+                    %tr{class: invoice_status(invoice)}
+                      %td= link_to invoice.code, invoice
+                      %td= invoice.customer.name
+                      %td= l(invoice.created_at.to_date, format: :short)
+                      %td= l(invoice.expiration, format: :short) if invoice.expiration
+                      %td.amount= number_to_currency invoice.total
+                - else
+                  %tr
+                    %td{colspan: 6} No se encontraron facturas

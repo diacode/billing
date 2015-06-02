@@ -1,0 +1,29 @@
+%header
+  %h1.pull-left Proyectos
+
+  .actions.pull-right
+    = link_to new_project_path, class: 'btn btn-lg btn-primary' do
+      %i.icon-plus
+      Nuevo proyecto
+
+  .clearfix
+
+.container.regular-view-wrapper
+  %ul.filters.list-inline
+    %li.active= link_to "Todos", projects_path, class: ('active' unless params[:filter].present?)
+    %li= link_to "Activos", projects_path(filter: 'active'), class: ('active' if params[:filter] == 'active')
+    %li= link_to "Concluídos", projects_path(filter: 'finished'), class: ('active' if params[:filter] == 'finished')
+
+  .portlet
+    %table.table.table-bordered.table-striped
+      %thead
+        %th Proyecto
+        %th Cliente
+        %th Deadline
+
+      %tbody.shadowed
+        - if projects.any?
+          = render projects
+        - else
+          %tr
+            %td{colspan: 3} No se encontraron proyectos.

@@ -1,0 +1,151 @@
+@import "bootstrap";
+
+/* Overrides */
+table.table{
+  thead{
+    tr{
+      th{
+        border-bottom-width: 1px;
+        border-color: #e2e7e7;
+
+        &.centered{ text-align: center; }
+      }
+    }
+  }
+
+  tbody{
+    tr{
+      td{
+        border-color: #e2e7e7;
+
+        &.actions{
+          width: 10px;
+          text-align: center;
+        }
+
+        &.number{
+          text-align: right;
+        }
+      }
+
+      &:nth-child(odd){
+        td{
+          background-color: #f9fcfd;
+        }
+      }
+    }
+  }
+
+  tfoot.total-footer{
+    font-weight: 700;
+    td:first-child{
+      text-align: right;
+      border-left-color: transparent;
+      border-bottom-color: transparent;
+    }
+
+    td{
+      &.number{
+        text-align: right;
+      }
+    }
+  }
+
+  &.table-bordered{
+    th{
+      border-left-width: 0px;
+      border-right-width: 0px;
+    }
+  }
+
+  thead, tbody, tfoot{
+    th, td{
+      padding: 10px 15px;
+    }
+  }
+}
+
+.panel{
+  border-radius: 0px;
+
+  &.panel-default{
+    > .panel-heading{
+      background-color: #f0f5f6;
+    }
+  }
+}
+
+.panel-title{
+  font-size: inherit;
+  font-weight: 500;
+  color: #91a0ae;
+}
+
+.modal{
+  .modal-dialog{
+    .modal-content{
+      border-radius: 0px;
+
+      .modal-header{
+        background-color: #4a5865;
+        color: #fff;
+        border-bottom: 0px;
+
+        .close{
+          font-size: 45px;
+          line-height: 35px;
+        }
+      }
+
+      .modal-body{
+
+      }
+
+      .modal-footer{
+        margin-top: 0px;
+      }
+    }
+  }
+}
+
+.dropdown {
+  display: inline-block;
+}
+
+.btn{
+  &.btn-primary{
+    border-top-color: $btn-primary-bg;
+    border-left-color: $btn-primary-bg;
+    border-right-color: $btn-primary-bg;
+    border-bottom: 3px solid darken($btn-primary-bg, 20%);
+  }
+
+  &.btn-danger{
+    border-top-color: $btn-danger-bg;
+    border-left-color: $btn-danger-bg;
+    border-right-color: $btn-danger-bg;
+    border-bottom: 3px solid darken($btn-danger-bg, 20%);
+  }
+
+  &.btn-default{
+    border-top-color: $btn-default-bg;
+    border-left-color: $btn-default-bg;
+    border-right-color: $btn-default-bg;
+    border-bottom: 3px solid darken($btn-default-bg, 20%);
+
+    &:hover{
+      border-color: darken($btn-default-bg, 10%);
+    }
+  }
+}
+
+.alert{
+  &.alert-notice{
+    @extend .alert-info;
+  }  
+}
+
+.form-control.pickadate[readonly]{
+  cursor:pointer;
+  background-color: #fff;
+}

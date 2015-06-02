@@ -1,0 +1,266 @@
+#billing_index{
+  .grid-wrapper{
+    margin-top: 20px;
+  }
+}
+
+#invoice_view{
+  #invoice_actions{
+    background-color: rgba(206, 206, 206, 0.5);
+    padding: 10px;
+    margin-bottom: 40px;
+    text-align: right;
+    border-bottom: 1px solid #bbb;
+    border-top: 1px solid #bbb;
+    .container{ width: 100%; }
+  }
+
+  > .container {
+    width: 80%;
+  }
+
+  .invoice-meta{
+    > div:not(.date){
+      margin-bottom: 50px;
+    }
+    .invoice-code{ text-align: left; }
+    
+    .date{
+      float: right;
+      clear: both;
+
+      input[type="text"]{
+        background-color: transparent;
+        border: 0px;
+        text-align: right;
+        padding: 3px;
+
+        &:hover{
+          cursor: pointer;
+          background-color: #fff;
+        }
+
+        &:focus{
+          background-color: #fff;
+        }
+
+        &.picker__input--active{
+          background-color: #fff;
+        }
+      }
+
+      #created_at, #expiration{
+        width: 160px;
+      }
+    }
+  }
+
+  table#invoice_detail{
+    th, td{
+      &.subject{ width: 70%; }
+      &.project{ width: 15%; }
+      &.amount{ 
+        width: 15%; 
+        text-align: right;
+      }
+    }
+
+    th.subject{ text-align: left; }
+    th.amount{ text-align: right; }
+    th.actions{ text-align: center; }
+
+    tbody{
+      tr.no-data-row{
+        @extend .text-muted;
+        text-align: center;
+      }
+
+      tr.item{
+        td{        
+          &.cost, &.actions{
+            text-align: right;
+          }
+
+          &.actions{
+            vertical-align: middle;
+            
+            a{
+              cursor: pointer;
+              margin-left: 10px;
+            }
+          }
+
+          span.period{
+            @extend .text-muted;
+            font-size: small;
+            margin-left: 5px;
+          }
+
+          input, select{ display: none; }
+
+          .save-item, .cancel-item-edition{ 
+            display: none; 
+          }
+        }
+
+        &.editing-mode{
+          td{
+            span{ display:none; }
+            input, select{ display: inline; }
+            
+            .edit-item, .delete-item{ display: none; }
+            .save-item, .cancel-item-edition{
+              display: inline;
+            }
+          }
+        }
+
+        &.period{
+          /* Period items are not editable atm */
+          .edit-item{ display: none; }
+        }
+      }
+
+      tr:hover td{
+        background-color: darken(#e9edf5, 5%);
+      }
+    }
+
+    tfoot{
+      td.paid{
+        text-align: center;
+        vertical-align: middle;
+        width: 70%;
+        label{
+          font-size: 25px;
+          font-weight: normal;
+          margin-right: 10px;
+          margin-bottom: 0px;
+        }
+      }
+
+      td.title{
+        text-align: right;
+      }
+
+      td{
+        border-color: transparent;
+
+        &.total{ font-weight: 900; }
+
+        &.vat{
+          input{ 
+            width: 75px; 
+            text-align: right;
+            display: none;
+          }
+
+          &.editing-mode{
+            input{ display: inline; }
+            span{ display: none; }
+          }
+        }
+      }
+    }
+  }
+
+  #period_modal{
+    /* Modal Overrides */
+    .modal-body{
+      background-color: #e9ecef;
+      box-shadow: inset 0 1px 2px #ccc;
+    }
+
+    .modal-footer{
+      margin-top: 0px;
+      border-color: transparent;
+      background-color: #e9ecef;
+      padding-top: 0px;
+    }
+
+    .modal-tip{
+      font-size: 0.8em;
+      padding: 0.3em 0.5em;
+      background-color: #FDFD90;
+
+      i {
+        vertical-align: middle;
+      }
+    }
+
+    section{
+      h1, h2, h3, h4, h5{
+        margin-top: 0px;
+        text-align: center;
+      }
+    }
+
+    #current_selection{
+      .row{
+      }
+
+      .control{
+        background-color: #fff;
+        border-radius: 5px;
+        color: #999;
+        padding: 10px 15px;
+        font-weight: 500;
+        font-size: 20px;
+        box-shadow: 0px 1px 3px #CACACA;
+        margin-bottom: 15px;
+
+        i{
+          margin-right: 10px;
+          vertical-align: middle;
+          line-height: normal;
+        }
+
+        input[type="text"]{
+          border: none;
+          outline: none;
+          width: 200px;
+        }
+
+        &.tracked-time.loading{
+          background: asset-url("loading-bubbles.svg") center center no-repeat;
+          .tracked-time-value{ display:none; }
+        }
+
+        #item_project_id{
+          background: transparent;
+          border: none;
+          width: 100%;
+          outline: none;
+        }
+
+        input[type="text"], select{
+          &:disabled{
+            opacity: .5;
+          }
+        }
+      }
+
+      #total_cost{
+        margin-top: 20px;
+
+        &.loading{
+          width: 100%;
+          height: 50px;
+          background: asset-url("loading-bubbles.svg") center center no-repeat;
+        
+          h4, h2{ display: none; }
+        }
+      }
+    }
+  }
+
+  #email_modal{
+    .form-group:last-child{
+      margin-bottom: 0px;
+    }
+
+    textarea#message{
+      height: 200px;
+    }
+  }
+}

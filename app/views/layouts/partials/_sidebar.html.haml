@@ -1,0 +1,25 @@
+%aside#sidebar
+  %header
+    %h1= link_to 'Smithers', root_path
+
+  %ul
+    %li{class: ('active' if controller_name == 'home')}
+      = link_to root_path do
+        %i.icon.icon-dashboard
+        Dashboard
+    %li{class: ('active' if controller_name == 'customers')}
+      = link_to customers_path do
+        %i.icon.icon-users
+        Clientes
+    %li{class: ('active' if controller_name == 'projects')}
+      = link_to projects_path do
+        %i.icon.icon-archive
+        Proyectos
+    %li{class: ('active' if controller_name == 'invoices')}
+      = link_to invoices_path do
+        %i.icon.icon-document
+        Facturación
+    %li{class: ('active' if controller_name == 'bank_records')}
+      = link_to bank_records_path do
+        %i.icon.icon-chart-line
+        Balance

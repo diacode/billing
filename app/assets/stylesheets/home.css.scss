@@ -1,0 +1,98 @@
+@-webkit-keyframes 'blink' {
+    50% { background: #FDFD90; }
+}
+
+#dashboard{
+  #balance, #income, #expenses{
+    margin-top: 50px;
+    padding: 15px;
+    border-radius: 15px;
+
+    h3{
+      margin-top: 0px;
+    }
+
+    .value{
+      font-size: 45px;
+      font-weight: bold;
+    }
+  }
+
+  #balance{
+    background-color: #04A2C9;
+    color: #5BDEFD;
+  }
+
+  #income{
+    background-color: #2FB166;
+    color: #64F6A2;
+
+    .pending{
+      display:inline;
+      font-size: 14px;
+      border-bottom: 1px dotted #64F6A2;
+      cursor: help;
+      vertical-align: top;
+      font-weight: normal;
+
+      &:hover{
+        color: lighten(#64F6A2, 10%);
+        border-color: lighten(#64F6A2, 10%);
+      }
+    }
+  }
+
+  #expenses{
+    background-color: #E8776D;
+    color: #ECCFCD;
+  }
+
+  #last_bank_records, #last_invoices{
+    margin-top: 60px;
+
+    h2{
+      margin-bottom: 30px;
+      color: #91A0AE;
+    }
+
+    table {
+      min-height: 270px;
+
+      thead{
+        th{ text-align: center; }
+      }
+
+      tbody{
+        td.amount{ text-align: right; }
+      }
+    }
+  }
+
+  #last_bank_records{
+    table{
+      tr.recent{
+        td{
+          -webkit-animation-direction: normal;
+          -webkit-animation-duration: 3s;
+          -webkit-animation-iteration-count: 5;
+          -webkit-animation-name: blink;
+          -webkit-animation-timing-function: linear;
+        }
+      }
+    }
+  }
+
+  #last_invoices{
+    table{
+      tr{
+        &.paid td{
+          background-color: #DFF0D8;
+        }
+
+        &.expired td{
+          background-color: #ECCFCD; 
+        }
+      }
+    }
+  }
+}

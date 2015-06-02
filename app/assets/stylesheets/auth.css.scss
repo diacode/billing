@@ -1,0 +1,47 @@
+@import "bootstrap_and_overrides";
+@import "smither-icons";
+
+body{
+  background-color: #e9edf5;
+  margin: 0;
+  padding: 0;
+  font-family: 'Lato', sans-serif;
+  font-size: 1.7em;
+  font-weight: 300;
+}
+
+header{
+  background-color: #020202;
+  color: #fff;
+  margin: 0;
+  padding: 20px 0px;
+
+  h1{
+    margin: 0;
+    text-align: center;
+    a{ 
+      color: #fff; 
+      &:hover{
+        color: #fff;
+      }
+    }
+  }
+}
+
+#wrapper{
+  margin-top: 100px;
+}
+
+h2{
+  margin-bottom: 20px;
+}
+
+.form-actions{
+  input[type="submit"]{
+    margin-left: 18%;
+  }
+}
+
+#auth_links{
+  margin-top: 20px;
+}

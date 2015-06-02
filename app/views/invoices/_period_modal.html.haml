@@ -1,0 +1,59 @@
+#period_modal.modal.fade
+  = form_for @invoice.items.build, url: invoice_items_url(@invoice.id), remote: true do |f|
+    = f.hidden_field :description
+    = f.hidden_field :cost
+    = f.hidden_field :period_start
+    = f.hidden_field :period_end
+    = f.hidden_field :hours
+
+    .modal-dialog
+      .modal-content
+        .modal-header
+          %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", type: "button"} ×
+          %h3.modal-title Agregar nuevo periodo de facturación
+
+        .modal-tip.hidden
+          %i.icon-bell
+          %span.period-detail
+
+        .modal-body
+          %section#current_selection
+            .row
+              .col-md-12
+                .control
+                  = f.select :project_id, period_project_options(@projects), prompt: 'Selecciona un proyecto'
+
+            .row
+              .col-md-6
+                .control
+                  %i.icon-calendar
+                  = text_field_tag :period_from, nil, placeholder: 'Desde', class: 'datepicker'
+
+              .col-md-6
+                .control
+                  %i.icon-calendar
+                  = text_field_tag :period_until, nil, placeholder: 'Hasta', class: 'datepicker'
+
+            .row
+              .col-md-6
+                .control.tracked-time
+                  %i.icon-clock
+                  %span.tracked-time-value
+
+              .col-md-6
+                .control
+                  %i.icon-banknote
+                  %span.ratio 
+                  EUR/hora
+
+            .row
+              #total_cost.col-md-12
+                %h4 Importe total
+                %h2
+
+            / %label Horas
+            / %input{type: 'text', value: 120}
+
+        .modal-footer
+          %button#add_period.btn.btn-lg.btn-block.btn-primary{type: "submit"} 
+            Añadir periodo

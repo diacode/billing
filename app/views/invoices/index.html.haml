@@ -1,0 +1,47 @@
+#billing_index
+  %header
+    %h1.pull-left Facturación
+
+    .actions.pull-right
+      = link_to new_invoice_path, class: 'btn btn-lg btn-primary' do
+        %i.icon-plus
+        Nueva factura
+
+    .clearfix
+
+  .container.regular-view-wrapper
+    .row
+      .grid-wrapper.col-md-12
+        = render "shared/flash_notifications"
+
+        .date-filter.pull-left
+          = text_field_tag :range, get_current_date_filter, placeholder: 'Selecciona una fecha'
+
+        %ul.filters.list-inline.pull-right
+          %li= link_to "Emitidas", invoices_path, class: ('active' unless params[:filter].present?)
+          %li= link_to "Pendientes", invoices_path(filter: 'pending'), class: ('active' if params[:filter] == 'pending')
+          %li= link_to "Cobradas", invoices_path(filter: 'paid'), class: ('active' if params[:filter] == 'paid')
+
+        .clearfix
+
+        .portlet
+          %table.table.table-bordered.table-striped
+            %thead
+              %th Código
+              %th Cliente
+              %th Emision
+              %th Importe
+              %th Estado
+
+            %tbody.shadowed
+              - if @invoices.any?
+                - @invoices.each do |invoice|
+                  %tr
+                    %td= link_to invoice.code, invoice
+                    %td= invoice.customer.name
+                    %td= l invoice.created_at.to_date, format: :long
+                    %td= number_to_currency invoice.total
+                    %td= invoice.paid ? 'Pagada' : 'Pendiente'
+              - else
+                %tr
+                  %td{colspan: 6} No se encontraron facturas

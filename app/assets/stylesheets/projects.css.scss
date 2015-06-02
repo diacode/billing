@@ -1,0 +1,84 @@
+.project-form{
+  #txt_description, #txt_stack{
+    height: 150px;
+  }
+}
+
+/*
+ * Project detail view
+ */
+#project_detail{
+  .project-title{
+    margin: 25px 10px;
+    .media-object{
+      margin-right: 20px;
+    }
+  }
+
+  #timing_tab{
+    #deadline_wrapper{
+      margin-bottom: 20px;
+
+      p.not-available{
+        margin: 8px 0px;
+        font-size: 2em;
+      }
+
+      .progress.deadline{
+        height: 10px;
+        margin-bottom: 5px;
+      }
+
+      .start-date, .end-date{
+        font-size: 0.7em;
+      }
+
+      .overdue{ color: red; }
+    }
+
+    #time_counters{
+      text-align: right;
+
+      .icon-clock{
+        font-size: 50px;
+      }
+
+      .counter{
+        display: inline-block;
+        text-align: center;
+        margin-left:25px;
+
+        .counter-heading{
+          font-size: 0.7em;
+          text-transform: uppercase;
+        }
+        .counter-number{
+          font-weight: 600;
+          font-size: 1.5em;
+        }
+        .counter-footer{
+          font-size: 0.7em;
+          text-transform: uppercase;
+        }
+
+        img.loader {
+          display:none;
+        }
+
+        &.is-loading{
+          img.loader{
+            display:inline;
+          }
+        }
+      }
+    }
+
+    #time_records{
+      margin-top:25px;
+
+      .date, .length{ width: 10%; }
+      .subject{ width: 80%; }
+    }
+  }
+}
+
