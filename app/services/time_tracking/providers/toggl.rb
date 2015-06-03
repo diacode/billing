@@ -1,5 +1,5 @@
 module TimeTracking
-  module Services
+  module Providers
     class Toggl < Base
       def initialize
         @connection = Faraday.new(:url => 'https://toggl.com/reports/api/v2') do |faraday|
