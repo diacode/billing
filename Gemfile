@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.10'
+gem 'rails', '4.2.1'
 gem 'rails-i18n'
 
 # Use postgresql as the database for Active Record
@@ -41,7 +41,7 @@ gem 'haml-rails'
 gem 'uglifier', '>= 1.3.0'
 
 # Use CoffeeScript for .js.coffee assets and views
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails', '~> 4.1.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -90,5 +90,5 @@ gem 'hipchat'
 gem 'slack-notifier'
 
 # React
-gem 'react-rails', '~> 1.0.0.pre', github: 'reactjs/react-rails'
+gem 'react-rails', '~> 1.0'
 gem 'sprockets-coffee-react'
