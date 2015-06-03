@@ -1,5 +1,5 @@
 module TimeTracking
-  module Services
+  module Providers
     class Base
       def get(path, params)
         response = @connection.get path, params
