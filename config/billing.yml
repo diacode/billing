@@ -12,10 +12,10 @@ default: &default
     room: <%= ENV['NOTIFICATIONS_ROOM'] %>
 
   bank_account:
-    entity:  <%= ENV['NOTIFICATIONS_BANK_ACCOUNT_ENTITY'] %>
-    username: <%= ENV['NOTIFICATIONS_BANK_ACCOUNT_USERNAME'] %>
-    password: <%= ENV['NOTIFICATIONS_BANK_ACCOUNT_PASSWORD'] %>
-    birthday: <%= ENV['NOTIFICATIONS_BANK_ACCOUNT_BIRTHDAY'] %>
+    entity:  <%= ENV['BANK_ACCOUNT_ENTITY'] %>
+    username: <%= ENV['BANK_ACCOUNT_USERNAME'] %>
+    password: <%= ENV['BANK_ACCOUNT_PASSWORD'] %>
+    birthday: <%= ENV['BANK_ACCOUNT_BIRTHDAY'] %>
 
   invoice:
     last_legacy_id: <%= ENV['INVOICE_LAST_LEGACY_ID'] %>
