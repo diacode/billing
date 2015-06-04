@@ -21,7 +21,7 @@
           %li= link_to "Enviar email", "#email_modal", data: {toggle: 'modal'}
 
       .dropdown
-        = link_to "Añadir concepto", "#", class: 'btn btn-primary', data: {toggle: 'dropdown'}
+        = link_to "Añadir concepto", "#", class: 'btn btn-primary', data: {toggle: 'dropdown'}, disabled: adding_disabled?
 
         %ul.dropdown-menu.pull-right
           %li= link_to "Concepto normal", "#", id: "add_regular_item"

@@ -16,4 +16,14 @@ module InvoicesHelper
       'pending'
     end  
   end
+
+  def adding_disabled?
+    if ::BillingConfig['time_tracking']['provider'].present? &&
+        ::BillingConfig['time_tracking']['api_key'].present?
+      false
+    else
+      true
+    end
+  end
 end
+
