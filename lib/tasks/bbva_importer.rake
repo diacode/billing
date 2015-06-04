@@ -57,7 +57,7 @@ namespace :bbva_importer do
           # TODO: We should use a background job to handle this
           # call. Probably the best is to wait until ActiveJob is part of Rails 4.2 so that
           # we avoid to install another dependency like Sidekiq or DelayedJobs
-          Snitch.notify_bank_record(br) if Rails.env == "production"
+          ChatNotifications::ChatNotifications.new.notify_bank_record(br) if Rails.env == "production"
         end
       end
     else
