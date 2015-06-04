@@ -17,124 +17,128 @@ class Smithers.Views.BankRecords.EvolutionView extends Smithers.Views.Applicatio
     # In first place we have to discard all those records having
     # dates repeated keeping the record with the highest ID for 
     # the repeated date.
-    nest = d3.nest()
-      .key (d) -> d.operation_at
-      .entries(@chart_data)
+    if @chart_data.length is 0
+      $('#evolution_chart').html("
+      <h1 class='blank-slate'>There is no data here</h1>")
+    else
+      nest = d3.nest()
+        .key (d) -> d.operation_at
+        .entries(@chart_data)
 
-    data = nest.map (h) ->
-      h.values[h.values.length-1]
+      data = nest.map (h) ->
+        h.values[h.values.length-1]
 
-    # Date parsing
-    dateParser = d3.time.format("%Y-%m-%d").parse
-    data.forEach (d) -> 
-      d.date = dateParser(d.operation_at)
-      d.balance = parseFloat d.balance
+      # Date parsing
+      dateParser = d3.time.format("%Y-%m-%d").parse
+      data.forEach (d) -> 
+        d.date = dateParser(d.operation_at)
+        d.balance = parseFloat d.balance
 
-    margin =
-      top: 20
-      right: 20
-      bottom: 30
-      left: 20
+      margin =
+        top: 20
+        right: 20
+        bottom: 30
+        left: 20
 
-    @width = @chart.width() - margin.left - margin.right
-    @height = 500 - margin.top - margin.bottom
-    parseDate = d3.time.format("%d-%b-%y").parse
+      @width = @chart.width() - margin.left - margin.right
+      @height = 500 - margin.top - margin.bottom
+      parseDate = d3.time.format("%d-%b-%y").parse
 
-    x = d3.time.scale().range([
-      0
-      @width
-    ])
-    
-    y = d3.scale.linear().range([
-      @height
-      0
-    ])
+      x = d3.time.scale().range([
+        0
+        @width
+      ])
+      
+      y = d3.scale.linear().range([
+        @height
+        0
+      ])
 
-    maxValue = d3.max data, (d) -> d.balance
+      maxValue = d3.max data, (d) -> d.balance
 
-    # Horizontal axis
-    xAxis = d3.svg.axis()
-      .scale(x)
-      .orient("bottom")
-      .ticks(d3.time.months)
-      .tickFormat(d3.time.format("%B"))
-    
-    yAxis = d3.svg.axis()
-      .scale(y)
-      .orient("right")
-      .tickSize(@width)
+      # Horizontal axis
+      xAxis = d3.svg.axis()
+        .scale(x)
+        .orient("bottom")
+        .ticks(d3.time.months)
+        .tickFormat(d3.time.format("%B"))
+      
+      yAxis = d3.svg.axis()
+        .scale(y)
+        .orient("right")
+        .tickSize(@width)
 
-    line = d3.svg.line().x((d) ->
-      x d.date
-    ).y((d) ->
-      y d.balance
-    ).interpolate("linear")
-
-
-    svg = d3.select("##{@chart.attr('id')}").append("svg").attr("width", @width + margin.left + margin.right).attr("height", @height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-
-    x.domain d3.extent(data, (d) ->
-      d.date
-    )
-
-    y.domain [0, maxValue+5000]
-
-    svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + @height + ")").call xAxis
-    gy = svg.append("g").attr("class", "y axis").call(yAxis)
-    svg.append("path").datum(data).attr("class", "line").attr "d", line
-
-    # Tooltip div creation
-    @tooltip = d3.select("body").append("div")   
-      .attr("class", "d3-tooltip")               
-      .style("visibility", 'hidden')
-
-    # Adding dots
-    svg.selectAll("dot")
-      .data(data)
-      .enter()
-      .append("circle")
-      .attr("class", "dot")
-      .attr("r", @regularDotRadius).attr("cx", (d) ->
+      line = d3.svg.line().x((d) ->
         x d.date
-      ).attr("cy", (d) ->
+      ).y((d) ->
         y d.balance
-      ).on("mouseover", (d) =>
-        # Showing tooltip
-        @showTooltip(d)
-        
-        # Drawing lines to axes
-        circle = d3.select(d3.event.toElement)
-        @drawLineToAxes(circle, "x")
-        @drawLineToAxes(circle, "y")
+      ).interpolate("linear")
 
-        # Increasing dot radius
-        circle.transition()
-          .duration(200)
-          .attr("r", (circle.attr("r") * 1.4))
 
-      ).on("mousemove", =>
-        @moveTooltip(event.pageY, event.pageX)
+      svg = d3.select("##{@chart.attr('id')}").append("svg").attr("width", @width + margin.left + margin.right).attr("height", @height + margin.top + margin.bottom).append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
-      ).on "mouseout", =>
-        @hideTooltip()
-        d3.selectAll(".line-helper").remove()
+      x.domain d3.extent(data, (d) ->
+        d.date
+      )
 
-        # Reverting dot radius increasing
-        circle = d3.select(d3.event.fromElement)
-        circle.transition()
-          .duration(200)
-          .attr("r", @regularDotRadius)
+      y.domain [0, maxValue+5000]
 
-    # Some modifications to the y axis
-    gy.selectAll("g")
-      .filter((d) -> d)
-      .classed("minor", true)
+      svg.append("g").attr("class", "x axis").attr("transform", "translate(0," + @height + ")").call xAxis
+      gy = svg.append("g").attr("class", "y axis").call(yAxis)
+      svg.append("path").datum(data).attr("class", "line").attr "d", line
 
-    gy.selectAll("text")
-      .attr("x", 4)
-      .attr("dy", -4)
+      # Tooltip div creation
+      @tooltip = d3.select("body").append("div")   
+        .attr("class", "d3-tooltip")               
+        .style("visibility", 'hidden')
 
-    return
+      # Adding dots
+      svg.selectAll("dot")
+        .data(data)
+        .enter()
+        .append("circle")
+        .attr("class", "dot")
+        .attr("r", @regularDotRadius).attr("cx", (d) ->
+          x d.date
+        ).attr("cy", (d) ->
+          y d.balance
+        ).on("mouseover", (d) =>
+          # Showing tooltip
+          @showTooltip(d)
+          
+          # Drawing lines to axes
+          circle = d3.select(d3.event.toElement)
+          @drawLineToAxes(circle, "x")
+          @drawLineToAxes(circle, "y")
+
+          # Increasing dot radius
+          circle.transition()
+            .duration(200)
+            .attr("r", (circle.attr("r") * 1.4))
+
+        ).on("mousemove", =>
+          @moveTooltip(event.pageY, event.pageX)
+
+        ).on "mouseout", =>
+          @hideTooltip()
+          d3.selectAll(".line-helper").remove()
+
+          # Reverting dot radius increasing
+          circle = d3.select(d3.event.fromElement)
+          circle.transition()
+            .duration(200)
+            .attr("r", @regularDotRadius)
+
+      # Some modifications to the y axis
+      gy.selectAll("g")
+        .filter((d) -> d)
+        .classed("minor", true)
+
+      gy.selectAll("text")
+        .attr("x", 4)
+        .attr("dy", -4)
+
+      return
 
   showTooltip: (data) ->
     amount = numeral(data.balance).format('0,0[.]00 $')
