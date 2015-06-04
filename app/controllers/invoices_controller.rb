@@ -7,7 +7,7 @@ class InvoicesController < BaseController
 
   def show
     @customer = @invoice.customer
-    @projects = @customer.projects
+    @projects = @customer.projects.trackable.priced
 
     respond_to do |format|
       format.html

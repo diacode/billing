@@ -37,7 +37,8 @@ class Project < ActiveRecord::Base
   validates :name, :customer, presence: true
 
   # Scopes
-  scope :trackable, -> { where('tracking_id IS NOT NULL')}
+  scope :trackable, -> { where('tracking_id IS NOT NULL').where('tracking_service IS NOT NULL') }
+  scope :priced, -> { where('ratio IS NOT NULL') }
 
   def current_time_gap(accomplished_hours)
     a = ending-start
