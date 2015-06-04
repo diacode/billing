@@ -21,11 +21,12 @@
           %li= link_to "Enviar email", "#email_modal", data: {toggle: 'modal'}
 
       .dropdown
-        = link_to "Añadir concepto", "#", class: 'btn btn-primary', data: {toggle: 'dropdown'}, disabled: adding_disabled?
+        = link_to "Añadir concepto", "#", class: 'btn btn-primary', data: {toggle: 'dropdown'}
 
         %ul.dropdown-menu.pull-right
           %li= link_to "Concepto normal", "#", id: "add_regular_item"
-          %li= link_to "Horas facturadas", "#period_modal", class: '', data: {toggle: 'modal'}
+          - if is_time_tracking_enabled?
+            %li= link_to "Horas facturadas", "#period_modal", class: '', data: {toggle: 'modal'}
 
   .container.regular-view-wrapper
     .row.invoice-meta

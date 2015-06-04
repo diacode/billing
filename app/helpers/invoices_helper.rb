@@ -17,12 +17,12 @@ module InvoicesHelper
     end  
   end
 
-  def adding_disabled?
+  def is_time_tracking_enabled?
     if ::BillingConfig['time_tracking']['provider'].present? &&
         ::BillingConfig['time_tracking']['api_key'].present?
-      false
-    else
       true
+    else
+      false
     end
   end
 end
