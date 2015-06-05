@@ -1,4 +1,6 @@
 @InvoiceItemList = React.createClass
+  displayName: 'InvoiceItemList'
+
   getInitialState: ->
     items: []
 

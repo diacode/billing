@@ -1,4 +1,12 @@
 @InvoiceTable = React.createClass
+  displayName: 'InvoiceTable'
+
+  _renderItemList: ->
+    <InvoiceItemList items={@props.items} projects={@props.projects} invoice_id={@props.invoice_id} />
+
+  _renderTotals: ->
+    <InvoiceTotals items={@props.items} vat={@props.vat} invoice_id={@props.invoice_id} paid={@props.paid} />
+
   render: ->
     <table id="invoice_detail" className="table">
       <thead>
@@ -9,6 +17,6 @@
           <th className="actions">&nbsp;</th>
         </tr>
       </thead>
-      <InvoiceItemList items={@props.items} projects={@props.projects} invoice_id={@props.invoice_id} />
-      <InvoiceTotals items={@props.items} vat={@props.vat} invoice_id={@props.invoice_id} paid={@props.paid} />
+      {@_renderItemList()}
+      {@_renderTotals()}
     </table>
