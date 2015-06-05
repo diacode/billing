@@ -21,7 +21,7 @@
             .row
               .col-md-12
                 .control
-                  = f.select :project_id, period_project_options(@projects), prompt: 'Selecciona un proyecto'
+                  = f.select :project_id, period_project_options(@trackable_projects), prompt: 'Selecciona un proyecto'
 
             .row
               .col-md-6
