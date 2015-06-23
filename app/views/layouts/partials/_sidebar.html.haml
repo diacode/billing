@@ -1,6 +1,8 @@
 %aside#sidebar
   %header
-    %h1= link_to 'Smithers', root_path
+    %h1
+      = link_to root_path do
+        = image_tag "billing-logo.png", class: 'logo'
 
   %ul
     %li{class: ('active' if controller_name == 'home')}

@@ -82,11 +82,17 @@ a{
      height: 86px;
      vertical-align: middle;
      text-align: center;
-     padding: 20px 0px;
+     padding: 15px 0px;
 
      h1{
-       margin: 0;
-       a{ color: #fff; }
+        margin: 0;
+        a{ 
+          color: #fff; 
+
+          .logo{
+            width: 135px;
+          }
+        }
      }
    }
 
