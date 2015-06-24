@@ -2,6 +2,7 @@ default: &default
   time_tracking:
     provider: <%= ENV['TIME_TRACKING_PROVIDER'] %>
     api_key: <%= ENV['TIME_TRACKING_API_KEY'] %>
+    workspace: <%= ENV['TIME_TRACKING_WORKSPACE'] %>
 
   notifications:
     provider: <%= ENV['NOTIFICATIONS_PROVIDER'] %>
