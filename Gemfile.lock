@@ -50,7 +50,7 @@ GEM
       activerecord (>= 2.3.0)
       rake (>= 0.8.7)
     arel (6.0.0)
-    bank_scrap (0.0.13)
+    bank_scrap (0.0.16)
       activesupport (~> 4.1)
       execjs (~> 2.2)
       mechanize (~> 2.7.3)
@@ -334,7 +334,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   annotate
-  bank_scrap (~> 0.0.13)
+  bank_scrap (~> 0.0.16)
   bootstrap-sass
   byebug
   capybara

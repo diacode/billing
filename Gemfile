@@ -15,7 +15,7 @@ gem 'active_model_serializers'
 gem 'devise'
 
 # Bank Records fetching
-gem 'bank_scrap', '~> 0.0.13'
+gem 'bank_scrap', '~> 0.0.16'
 
 # Image uploads
 gem 'carrierwave'
