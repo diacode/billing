@@ -14,7 +14,7 @@ header{
   background-color: #020202;
   color: #fff;
   margin: 0;
-  padding: 20px 0px;
+  padding: 10px 0px;
 
   h1{
     margin: 0;
@@ -23,6 +23,10 @@ header{
       color: #fff; 
       &:hover{
         color: #fff;
+      }
+
+      img {
+        width: 150px;
       }
     }
   }
