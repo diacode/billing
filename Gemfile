@@ -15,7 +15,7 @@ gem 'active_model_serializers'
 gem 'devise'
 
 # Bank Records fetching
-gem 'bank_scrap'
+gem 'bank_scrap', '~> 0.0.16'
 
 # Image uploads
 gem 'carrierwave'
@@ -59,12 +59,14 @@ gem 'faraday'
 # PDF Generation
 gem 'prawn'
 
-# Debugging
-gem 'byebug'
-gem 'jazz_hands', group: [:development, :test], github: 'nixme/jazz_hands', branch: 'bring-your-own-debugger'
-
 # Testing
 group :development, :test do
+  gem 'byebug'
+  gem 'pry-rails'
+
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console', '~> 2.0'
+  
   gem 'rspec-rails'
   gem 'capybara'
   gem 'poltergeist'
