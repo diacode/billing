@@ -19,6 +19,7 @@ You can configure your notifications to address either **Slack** or **Hipchat**.
 
 #### Common provider settings
 
+* `enabled`: Whether you want to notify new bank records or not. This setting is `true` by default.
 * `provider`: Only admits `slack` or `hipchat`.
 * `username`: Name of the user to display sending the notification.
 
