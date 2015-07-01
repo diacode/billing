@@ -1,51 +1,70 @@
 @import "bootstrap_and_overrides";
 @import "smither-icons";
 
-body{
-  background-color: #e9edf5;
+body.auth{
+  background: linear-gradient(rgba(48, 57, 118, 0.85), rgba(48, 57, 118, 0.85)), image-url("auth-bg.jpg");
+  background-size: cover;
+  position: relative;
+  min-height: 100vh;
   margin: 0;
   padding: 0;
   font-family: 'Lato', sans-serif;
   font-size: 1.7em;
   font-weight: 300;
-}
 
-header{
-  background-color: #020202;
-  color: #fff;
-  margin: 0;
-  padding: 10px 0px;
-
-  h1{
-    margin: 0;
+  .wrapper {
+    transform: translate(-50%, -50%);
+    position: absolute;
+    width: 450px;
+    top: 40%;
+    left: 50%;
     text-align: center;
-    a{ 
-      color: #fff; 
-      &:hover{
-        color: #fff;
-      }
-
+    header {
+      text-align: center;
+      margin-bottom: 5em;
       img {
-        width: 150px;
+        width: 200px;
       }
     }
   }
-}
 
-#wrapper{
-  margin-top: 100px;
-}
-
-h2{
-  margin-bottom: 20px;
-}
-
-.form-actions{
-  input[type="submit"]{
-    margin-left: 18%;
+  h3 {
+    color: white;
   }
-}
 
-#auth_links{
-  margin-top: 20px;
+  form {
+    .field {
+      margin: 0.5em 0;
+    }
+    input {
+      &[type="text"] {}
+      &[type="email"],
+      &[type="password"],
+      &[type="submit"] {
+        border: 0px none;
+        width: 350px;
+        padding: 1em;
+        font-size: 1.1em;
+      }
+    }
+    .actions {
+      margin-bottom: 1em;
+    }
+  }
+
+  footer{
+    position: absolute;
+    bottom: 5px;
+    right: 15px;
+    color: #949494;
+
+    .attribution{
+      font-size: .75em;
+
+      a{
+        color: #949494;
+        text-decoration: underline;
+      }
+    }
+  }
 }
