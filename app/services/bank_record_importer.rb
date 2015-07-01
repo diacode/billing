@@ -12,6 +12,8 @@ class BankRecordImporter
       when 'ing' then @bank = BankScrap::Ing.new(username, password, extra_args: {'birthday' => ::BillingConfig['bank_account']['birthday']})
       when 'bankinter' then @bank = BankScrap::Bankinter.new(username, password)
     end
+
+    @notifications = ChatNotifications.new
   end  
 
   # By default this method will import all bank records from last two years. If you need 
@@ -39,7 +41,7 @@ class BankRecordImporter
     transactions.reverse!
     transactions.each do |t|
       unless BankRecord.exists?(transaction_id: t.id)
-        BankRecord.create(
+        bank_record = BankRecord.create(
           subject: t.description,
           amount: t.amount,
           balance: t.balance,
@@ -47,6 +49,10 @@ class BankRecordImporter
           value_at: t.effective_date,
           transaction_id: t.id
         )
+
+        if ::BillingConfig['notifications']['enabled']
+          @notifications.notify_bank_record(bank_record)
+        end
       end
     end
   end

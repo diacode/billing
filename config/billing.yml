@@ -5,6 +5,7 @@ default: &default
     workspace: <%= ENV['TIME_TRACKING_WORKSPACE'] %>
 
   notifications:
+    enabled: true
     provider: <%= ENV['NOTIFICATIONS_PROVIDER'] %>
     username: <%= ENV['NOTIFICATIONS_USERNAME'] %> 
     webhook_url: <%= ENV['NOTIFICATIONS_WEBHOOK_URL'] %> 
