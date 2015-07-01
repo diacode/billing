@@ -1,5 +1,5 @@
 every 4.hours do
-  rake "bbva_importer:import_recent"
+  runner "BankRecordImporter.new.import_last"
 end
 
 # We refresh hours spent counters of all active projects 
