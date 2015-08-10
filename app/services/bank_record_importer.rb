@@ -12,8 +12,6 @@ class BankRecordImporter
       when 'ing' then @bank = BankScrap::Ing.new(username, password, extra_args: {'birthday' => ::BillingConfig['bank_account']['birthday']})
       when 'bankinter' then @bank = BankScrap::Bankinter.new(username, password)
     end
-
-    @notifications = ChatNotifications.new
   end  
 
   # By default this method will import all bank records from last two years. If you need 
@@ -24,23 +22,32 @@ class BankRecordImporter
     transactions = account.fetch_transactions(start_date: Date.today - 2.years, end_date: Date.today)
     transactions.reverse!
     transactions.each do |t|
-      BankRecord.create(
-        subject: t.description,
-        amount: t.amount,
-        balance: t.balance,
-        operation_at: t.effective_date,
-        value_at: t.effective_date,
-        transaction_id: t.id
-      )
+      if t.balance
+        BankRecord.create(
+          subject: t.description,
+          amount: t.amount,
+          balance: t.balance,
+          operation_at: t.effective_date,
+          value_at: t.effective_date,
+          transaction_id: t.id
+        )
+      end
     end
   end
 
   def import_last
+    notifier = nil
+
+    # Setup notifications if enabled
+    if ::BillingConfig['notifications']['enabled']
+      notifier = ChatNotifications::Notifer.new
+    end
+
     account = @bank.accounts.first
     transactions = account.fetch_transactions(start_date: Date.today - 2.days, end_date: Date.today)
     transactions.reverse!
     transactions.each do |t|
-      unless BankRecord.exists?(transaction_id: t.id)
+      unless BankRecord.exists?(transaction_id: t.id) or !t.balance
         bank_record = BankRecord.create(
           subject: t.description,
           amount: t.amount,
@@ -50,8 +57,9 @@ class BankRecordImporter
           transaction_id: t.id
         )
 
+        # Notify if enabled
         if ::BillingConfig['notifications']['enabled']
-          @notifications.notify_bank_record(bank_record)
+          notifier.notify_bank_record(bank_record)
         end
       end
     end
