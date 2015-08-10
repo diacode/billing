@@ -1,5 +1,5 @@
 module ChatNotifications
-  class ChatNotifications
+  class Notifier
 
     def initialize
       case ::BillingConfig['notifications']['provider']
