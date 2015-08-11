@@ -6,6 +6,7 @@ class InvoicePdf < Prawn::Document
   def initialize(invoice)
     super()
     @invoice = invoice
+    @predefined_text = ::BillingConfig['invoice']
 
     # Defining the layout
     define_grid(:columns => 14, :rows => 10, :gutter => 0)
@@ -43,7 +44,7 @@ class InvoicePdf < Prawn::Document
     move_down 35
     font_size 10
     default_leading 2
-    text BILLING_CONFIG['company_info'], style: :bold
+    text @predefined_text['company_info'], style: :bold
   end
 
   def recipient_billing_info
@@ -107,7 +108,7 @@ class InvoicePdf < Prawn::Document
 
   def payment_method
     text "Pago por transferencia bancaria", style: :bold
-    text BILLING_CONFIG['payment_info']
+    text @predefined_text['payment_info']
     move_down 20
   end
 
