@@ -11,22 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140630213847) do
+ActiveRecord::Schema.define(version: 20150629134100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "bank_records", force: true do |t|
+  create_table "bank_records", force: :cascade do |t|
     t.string   "subject"
-    t.decimal  "amount",       precision: 11, scale: 2
-    t.decimal  "balance",      precision: 11, scale: 2
+    t.decimal  "amount",         precision: 11, scale: 2
+    t.decimal  "balance",        precision: 11, scale: 2
     t.date     "operation_at"
     t.date     "value_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "transaction_id"
   end
 
-  create_table "customers", force: true do |t|
+  create_table "customers", force: :cascade do |t|
     t.string   "name"
     t.text     "billing_info"
     t.datetime "created_at"
@@ -35,7 +36,7 @@ ActiveRecord::Schema.define(version: 20140630213847) do
     t.string   "picture"
   end
 
-  create_table "invoices", force: true do |t|
+  create_table "invoices", force: :cascade do |t|
     t.string   "code"
     t.date     "expiration"
     t.integer  "vat"
@@ -47,7 +48,7 @@ ActiveRecord::Schema.define(version: 20140630213847) do
 
   add_index "invoices", ["customer_id"], name: "index_invoices_on_customer_id", using: :btree
 
-  create_table "items", force: true do |t|
+  create_table "items", force: :cascade do |t|
     t.string   "description"
     t.decimal  "cost",         precision: 11, scale: 2
     t.date     "period_start"
@@ -62,7 +63,7 @@ ActiveRecord::Schema.define(version: 20140630213847) do
   add_index "items", ["invoice_id"], name: "index_items_on_invoice_id", using: :btree
   add_index "items", ["project_id"], name: "index_items_on_project_id", using: :btree
 
-  create_table "projects", force: true do |t|
+  create_table "projects", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
     t.text     "stack"
@@ -77,12 +78,12 @@ ActiveRecord::Schema.define(version: 20140630213847) do
     t.datetime "updated_at"
     t.integer  "tracking_service"
     t.integer  "status"
-    t.decimal  "hours_spent",      precision: 11, scale: 4
+    t.decimal  "hours_spent",      precision: 11, scale: 4, default: 0.0
   end
 
   add_index "projects", ["customer_id"], name: "index_projects_on_customer_id", using: :btree
 
-  create_table "users", force: true do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
