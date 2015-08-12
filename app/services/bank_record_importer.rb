@@ -25,8 +25,8 @@ class BankRecordImporter
       if t.balance
         BankRecord.create(
           subject: t.description,
-          amount: t.amount,
-          balance: t.balance,
+          amount: t.amount.amount,
+          balance: t.balance.amount,
           operation_at: t.effective_date,
           value_at: t.effective_date,
           transaction_id: t.id
@@ -40,7 +40,7 @@ class BankRecordImporter
 
     # Setup notifications if enabled
     if ::BillingConfig['notifications']['enabled']
-      notifier = ChatNotifications::Notifer.new
+      notifier = ChatNotifications::Notifier.new
     end
 
     account = @bank.accounts.first
@@ -50,8 +50,8 @@ class BankRecordImporter
       unless BankRecord.exists?(transaction_id: t.id) or !t.balance
         bank_record = BankRecord.create(
           subject: t.description,
-          amount: t.amount,
-          balance: t.balance,
+          amount: t.amount.amount,
+          balance: t.balance.amount,
           operation_at: t.effective_date,
           value_at: t.effective_date,
           transaction_id: t.id
