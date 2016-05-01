@@ -14,8 +14,10 @@ gem 'active_model_serializers'
 # Authentication
 gem 'devise'
 
-# Bank Records fetching
-gem 'bank_scrap', '~> 0.0.16'
+# Uncomment the proper Bankscrap gem for your bank
+gem 'bankscrap-bbva-net-cash'
+# gem 'bankscrap-bbva'
+# gem 'bankscrap-ing'
 
 # Image uploads
 gem 'carrierwave'

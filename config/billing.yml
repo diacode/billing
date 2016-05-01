@@ -18,6 +18,7 @@ default: &default
     username: <%= ENV['BANK_ACCOUNT_USERNAME'] %>
     password: <%= ENV['BANK_ACCOUNT_PASSWORD'] %>
     birthday: <%= ENV['BANK_ACCOUNT_BIRTHDAY'] %>
+    company_code: <%= ENV['BANK_ACCOUNT_COMPANY_CODE'] %>
 
   invoice:
     last_legacy_id: <%= ENV['INVOICE_LAST_LEGACY_ID'] %>
