@@ -9,7 +9,7 @@ class BankRecordImporter
 
     case ::BillingConfig['bank_account']['entity']
       when 'bbva' then @bank = Bankscrap::BBVA::Bank.new(username, password)
-      when 'bbva-net-cash' then @bank = Bankscrap::BBVANetCash::Bank.new(username, pasword, extra_args: {company_code: ::BillingConfig['bank_account']['company_code']})
+      when 'bbva-net-cash' then @bank = Bankscrap::BBVANetCash::Bank.new(username, password, extra_args: {company_code: ::BillingConfig['bank_account']['company_code']})
       when 'ing' then @bank = Bankscrap::ING::Bank.new(username, password, extra_args: {birthday: ::BillingConfig['bank_account']['birthday']})
       when 'bankinter' then @bank = Bankscrap::Bankinter::Bank.new(username, password)
     end
