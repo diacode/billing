@@ -3,7 +3,7 @@
 # Table name: items
 #
 #  id           :integer          not null, primary key
-#  description  :string(255)
+#  description  :string
 #  cost         :decimal(11, 2)
 #  period_start :date
 #  period_end   :date

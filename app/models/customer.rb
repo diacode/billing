@@ -3,12 +3,13 @@
 # Table name: customers
 #
 #  id           :integer          not null, primary key
-#  name         :string(255)
+#  name         :string
 #  billing_info :text
 #  created_at   :datetime
 #  updated_at   :datetime
-#  email        :string(255)
-#  picture      :string(255)
+#  email        :string
+#  picture      :string
+#  language     :string           default("en")
 #
 
 class Customer < ActiveRecord::Base

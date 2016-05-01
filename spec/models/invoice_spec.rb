@@ -3,12 +3,12 @@
 # Table name: invoices
 #
 #  id          :integer          not null, primary key
-#  code        :string(255)
+#  code        :string
 #  expiration  :date
 #  vat         :integer
 #  created_at  :datetime
 #  updated_at  :datetime
-#  paid        :boolean          default(FALSE)
+#  paid        :boolean          default("false")
 #  customer_id :integer
 #
 # Indexes

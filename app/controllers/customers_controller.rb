@@ -47,6 +47,6 @@ class CustomersController < BaseController
   end
 
   def customer_params
-    params.require(:customer).permit(:name, :billing_info, :email, :picture)
+    params.require(:customer).permit(:name, :billing_info, :email, :picture, :language)
   end
 end
