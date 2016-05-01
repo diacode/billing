@@ -3,7 +3,7 @@
 # Table name: projects
 #
 #  id               :integer          not null, primary key
-#  name             :string(255)
+#  name             :string
 #  description      :text
 #  stack            :text
 #  start            :datetime
@@ -11,13 +11,13 @@
 #  budget           :integer
 #  ratio            :integer
 #  hours_agreed     :integer
-#  tracking_id      :string(255)
+#  tracking_id      :string
 #  customer_id      :integer
 #  created_at       :datetime
 #  updated_at       :datetime
 #  tracking_service :integer
 #  status           :integer
-#  hours_spent      :decimal(11, 4)
+#  hours_spent      :decimal(11, 4)   default("0")
 #
 # Indexes
 #

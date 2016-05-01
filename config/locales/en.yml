@@ -20,4 +20,15 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  invoice_pdf:
+    invoice: INVOICE
+    invoice_number: INVOICE NUMBER
+    date_issued: DATE ISSUED
+    please_make_payment: "Please make payment to"
+    due_date: Due date
+    description: Description
+    amount: Amount
+    thanks: Thank You!
+    total: Total
+    subtotal: Subtotal
+    vat: VAT

@@ -1,2 +1,13 @@
 es:
-  hello: "Hola mundo"
+  invoice_pdf:
+    invoice: FACTURA
+    invoice_number: NÚMERO DE FACTURA
+    date_issued: FECHA
+    please_make_payment: "Pago por transferencia bancaria a"
+    due_date: Fecha de vencimiento
+    description: Descripción
+    amount: Cantidad
+    thanks: ¡Muchas gracias!
+    total: Total
+    subtotal: Subtotal
+    vat: IVA
