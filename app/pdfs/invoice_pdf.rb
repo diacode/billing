@@ -9,7 +9,7 @@ class InvoicePdf < Prawn::Document
     @currency = '€'
     @predefined_text = ::BillingConfig['invoice']
 
-    I18n.with_locale(@invoice.customer.language)
+    I18n.with_locale(@invoice.customer.language) do
       fill_color '272D2D'
 
       # Defining the layout
@@ -35,7 +35,7 @@ class InvoicePdf < Prawn::Document
       end
 
       # grid([2,4], [9,13]).show
-    do
+    end
   end
 
   def header
