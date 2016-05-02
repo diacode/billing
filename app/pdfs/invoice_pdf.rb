@@ -6,35 +6,36 @@ class InvoicePdf < Prawn::Document
   def initialize(invoice)
     super()
     @invoice = invoice
-    I18n.locale = @invoice.customer.language
     @currency = '€'
     @predefined_text = ::BillingConfig['invoice']
 
-    fill_color '272D2D'
+    I18n.with_locale(@invoice.customer.language)
+      fill_color '272D2D'
 
-    # Defining the layout
-    define_grid(:columns => 14, :rows => 10, :gutter => 0)
+      # Defining the layout
+      define_grid(:columns => 14, :rows => 10, :gutter => 0)
 
-    grid([0,0], [1,11]).bounding_box do
-      header
-    end
+      grid([0,0], [1,11]).bounding_box do
+        header
+      end
 
-    grid([2,0], [9,3]).bounding_box do
-      company_info
-    end
+      grid([2,0], [9,3]).bounding_box do
+        company_info
+      end
 
-    # grid([2,0], [9,3]).show
+      # grid([2,0], [9,3]).show
 
-    grid([2,4], [9,13]).bounding_box do
-      recipient_billing_info
-      invoice_meta
-      table_content
-      payment_method
-      expiration
-      thanks
-    end
+      grid([2,4], [9,13]).bounding_box do
+        recipient_billing_info
+        invoice_meta
+        table_content
+        payment_method
+        expiration
+        thanks
+      end
 
-    # grid([2,4], [9,13]).show
+      # grid([2,4], [9,13]).show
+    do
   end
 
   def header
