@@ -37,7 +37,7 @@ You can configure your notifications to address either **Slack** or **Hipchat**.
 
 Settings required to access your bank records.
 
-* `entity`: The name of your bank. Right know only `bbva`, `ing`, and `bankinter` entities are supported. This part of the app relies on [bank_scrap gem](https://github.com/bank-scrap/bank_scrap).
+* `entity`: The name of your bank. This part of the app relies on [bankscrap gem](https://github.com/bankscrap/bankscrap), check out the list of supported banks there.
 * `username`: Name of the bank user.
 * `password`: Password of the bank user.
 * `birthday`: Birth day of the user in `dd/mm/yyyy` format. Only needed for `ing`.
