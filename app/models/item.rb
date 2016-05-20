@@ -4,7 +4,6 @@
 #
 #  id            :integer          not null, primary key
 #  description   :string
-#  old_cost      :decimal(11, 2)
 #  period_start  :date
 #  period_end    :date
 #  hours         :decimal(11, 2)

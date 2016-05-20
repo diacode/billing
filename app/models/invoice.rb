@@ -10,6 +10,7 @@
 #  updated_at  :datetime
 #  paid        :boolean          default("false")
 #  customer_id :integer
+#  currency    :string
 #
 # Indexes
 #
@@ -45,7 +46,7 @@ class Invoice < ActiveRecord::Base
   end
 
   def total
-    subtotal+vat_fee 
+    subtotal+vat_fee
   end
 
   def to_s

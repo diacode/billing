@@ -10,6 +10,7 @@
 #  updated_at  :datetime
 #  paid        :boolean          default("false")
 #  customer_id :integer
+#  currency    :string
 #
 # Indexes
 #

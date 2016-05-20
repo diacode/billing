@@ -86,7 +86,8 @@ class InvoicesController < BaseController
 
   def invoice_params
     params.require(:invoice).permit(
-      :customer_id,      
+      :customer_id,
+      :currency,
       :vat,
       :paid,
       :created_at,
