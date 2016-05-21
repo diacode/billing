@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160520114213) do
+ActiveRecord::Schema.define(version: 20160520153715) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,8 +72,6 @@ ActiveRecord::Schema.define(version: 20160520114213) do
     t.text     "stack"
     t.datetime "start"
     t.datetime "ending"
-    t.integer  "budget"
-    t.integer  "ratio"
     t.integer  "hours_agreed"
     t.string   "tracking_id"
     t.integer  "customer_id"
@@ -82,6 +80,11 @@ ActiveRecord::Schema.define(version: 20160520114213) do
     t.integer  "tracking_service"
     t.integer  "status"
     t.decimal  "hours_spent",      precision: 11, scale: 4, default: 0.0
+    t.string   "currency",                                  default: "EUR"
+    t.integer  "budget_cents",                              default: 0,     null: false
+    t.string   "budget_currency",                           default: "EUR", null: false
+    t.integer  "ratio_cents",                               default: 0,     null: false
+    t.string   "ratio_currency",                            default: "EUR", null: false
   end
 
   add_index "projects", ["customer_id"], name: "index_projects_on_customer_id", using: :btree

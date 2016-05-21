@@ -6,7 +6,7 @@
       = f.input :description, input_html: {rows: 6}
       = f.input :stack, hint: 'Emplea markdown para representar la lista que compone el stack', input_html: {rows: 6}
       = f.input :status, collection: Project.statuses.map{ |key, value| [key, key] }, include_blank: false
-      
+
     .col-md-6
       .panel.panel-default
         .panel-heading
@@ -26,6 +26,7 @@
           = f.input :budget
           = f.input :hours_agreed
           = f.input :ratio
+          = f.input :currency, collection: ['EUR', 'USD']
 
       .panel.panel-default
         .panel-heading
@@ -41,5 +42,3 @@
         = f.submit 'Guardar proyecto', class: 'btn btn-lg btn-primary'
         o
         = link_to 'Cancelar', projects_path
-
-

@@ -38,7 +38,7 @@ class Invoice < ActiveRecord::Base
 
   # Public methods
   def subtotal
-    items.sum(:cost)
+    items.sum(:cost_cents)/100
   end
 
   def vat_fee
