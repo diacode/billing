@@ -45,7 +45,7 @@ class Project < ActiveRecord::Base
 
   # Scopes
   scope :trackable, -> { where('tracking_id IS NOT NULL').where('tracking_service IS NOT NULL') }
-  scope :priced, -> { where('ratio IS NOT NULL') }
+  scope :priced, -> { where('ratio_cents IS NOT NULL') }
 
   # Hooks
   before_save :set_currencies
