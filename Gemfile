@@ -16,6 +16,7 @@ gem 'devise'
 
 # Money gem integration
 gem 'money-rails'
+gem 'google_currency'
 
 # Uncomment the proper Bankscrap gem for your bank
 gem 'bankscrap-bbva-net-cash'
@@ -99,3 +100,6 @@ gem 'slack-notifier'
 # React
 gem 'react-rails', '~> 1.0'
 gem 'sprockets-coffee-react'
+
+# Javascript i18n
+gem "i18n-js", ">= 3.0.0.rc11"
