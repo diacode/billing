@@ -3,7 +3,6 @@ class Smithers.Views.BankRecords.IncomeExpensesView extends Smithers.Views.Appli
     super()
     @chart = $('#income_expenses_chart')
     @chart_data = @chart.data('records')
-    numeral.language('es')
 
   render: ->
     super()

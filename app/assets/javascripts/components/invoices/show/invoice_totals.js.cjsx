@@ -15,8 +15,6 @@
       editingMode: false
       paid: @props.paid
     }
-  componentWillMount: ->
-    numeral.language('es')
     
   componentDidMount: ->
     $.pubsub('subscribe', 'invoiceChanged', @invoiceChanged)
@@ -87,7 +85,7 @@
         </td>
         <td className="title">Subtotal</td>
         <td className="amount subtotal">
-          {numeral(@state.subtotal).format('0,0[.]00 $')}
+          {I18n.toCurrency(@state.subtotal, unit: @props.currency)}
         </td>
       </tr>
 
@@ -104,14 +102,14 @@
       <tr>
         <td className="title">Cuota IVA</td>
         <td className="amount vat-fee">
-          {numeral(@state.vat_fee).format('0,0[.]00 $')}
+          {I18n.toCurrency(@state.vat_fee, unit: @props.currency)}
         </td>
       </tr>
 
       <tr>
         <td className="title">Total</td>
         <td className="amount total">
-          {numeral(@state.total).format('0,0[.]00 $')}
+          {I18n.toCurrency(@state.total, unit: @props.currency)}
         </td>
       </tr>
     </tfoot>

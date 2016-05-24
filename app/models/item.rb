@@ -2,16 +2,17 @@
 #
 # Table name: items
 #
-#  id           :integer          not null, primary key
-#  description  :string
-#  cost         :decimal(11, 2)
-#  period_start :date
-#  period_end   :date
-#  hours        :decimal(11, 2)
-#  invoice_id   :integer
-#  created_at   :datetime
-#  updated_at   :datetime
-#  project_id   :integer
+#  id            :integer          not null, primary key
+#  description   :string
+#  period_start  :date
+#  period_end    :date
+#  hours         :decimal(11, 2)
+#  invoice_id    :integer
+#  created_at    :datetime
+#  updated_at    :datetime
+#  project_id    :integer
+#  cost_cents    :integer          default("0"), not null
+#  cost_currency :string           default("EUR"), not null
 #
 # Indexes
 #
@@ -20,6 +21,9 @@
 #
 
 class Item < ActiveRecord::Base
+  monetize :cost_cents
+
+  # Associations
   belongs_to :invoice
   belongs_to :project
 

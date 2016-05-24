@@ -5,7 +5,6 @@ class Smithers.Views.BankRecords.EvolutionView extends Smithers.Views.Applicatio
     @chart_id = @chart.attr('id')
     @chart_data = @chart.data('records')
     @regularDotRadius = 3.5
-    numeral.language('es')
     @range = $("#range")
 
   render: ->

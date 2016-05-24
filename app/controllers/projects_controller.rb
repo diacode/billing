@@ -90,6 +90,7 @@ class ProjectsController < BaseController
       :ending,
       :budget,
       :ratio,
+      :currency,
       :hours_agreed,
       :status,
       :tracking_id,

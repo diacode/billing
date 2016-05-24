@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.3'
+gem 'rails', '4.2.6'
 gem 'rails-i18n'
 
 # Use postgresql as the database for Active Record
@@ -13,6 +13,10 @@ gem 'active_model_serializers'
 
 # Authentication
 gem 'devise'
+
+# Money gem integration
+gem 'money-rails'
+gem 'google_currency'
 
 # Uncomment the proper Bankscrap gem for your bank
 gem 'bankscrap-bbva-net-cash'
@@ -68,14 +72,14 @@ group :development, :test do
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
-  
+
   gem 'rspec-rails'
   gem 'capybara'
   gem 'poltergeist'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'faker'
-end 
+end
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
@@ -96,3 +100,6 @@ gem 'slack-notifier'
 # React
 gem 'react-rails', '~> 1.0'
 gem 'sprockets-coffee-react'
+
+# Javascript i18n
+gem "i18n-js", ">= 3.0.0.rc11"

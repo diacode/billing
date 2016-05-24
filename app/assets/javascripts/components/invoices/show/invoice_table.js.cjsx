@@ -1,11 +1,14 @@
 @InvoiceTable = React.createClass
   displayName: 'InvoiceTable'
 
+  componentWillMount: ->
+    I18n.locale = @props.locale
+    
   _renderItemList: ->
-    <InvoiceItemList items={@props.items} projects={@props.projects} invoice_id={@props.invoice_id} />
+    <InvoiceItemList items={@props.items} projects={@props.projects} invoice_id={@props.invoice_id} currency={@props.currency}/>
 
   _renderTotals: ->
-    <InvoiceTotals items={@props.items} vat={@props.vat} invoice_id={@props.invoice_id} paid={@props.paid} />
+    <InvoiceTotals items={@props.items} vat={@props.vat} invoice_id={@props.invoice_id} paid={@props.paid} currency={@props.currency}/>
 
   render: ->
     <table id="invoice_detail" className="table">

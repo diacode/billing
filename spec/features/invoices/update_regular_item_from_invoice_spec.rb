@@ -21,12 +21,12 @@ feature 'Update a regular item from an invoice', %q{
       find('input.cost').set(3000)
       find('a.save-item').click
 
-      expect(page).to have_selector('tr span', text: '3.000 €')
+      expect(page).to have_selector('tr span', text: '3.000,00 €')
     end
 
     within '#invoice_detail tfoot' do
-      expect(page).to have_selector('td.amount.vat-fee', text: '630 €')
-      expect(page).to have_selector('td.amount.total', text: '3.630 €')
+      expect(page).to have_selector('td.amount.vat-fee', text: '630,00 €')
+      expect(page).to have_selector('td.amount.total', text: '3.630,00 €')
     end
   end
 end

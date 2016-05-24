@@ -8,8 +8,6 @@
 #  stack            :text
 #  start            :datetime
 #  ending           :datetime
-#  budget           :integer
-#  ratio            :integer
 #  hours_agreed     :integer
 #  tracking_id      :string
 #  customer_id      :integer
@@ -18,6 +16,11 @@
 #  tracking_service :integer
 #  status           :integer
 #  hours_spent      :decimal(11, 4)   default("0")
+#  currency         :string           default("EUR")
+#  budget_cents     :integer          default("0"), not null
+#  budget_currency  :string           default("EUR"), not null
+#  ratio_cents      :integer          default("0"), not null
+#  ratio_currency   :string           default("EUR"), not null
 #
 # Indexes
 #
@@ -27,6 +30,10 @@
 class Project < ActiveRecord::Base
   enum status: [:active, :finished]
   enum tracking_service: [:toggl, :harvest]
+
+  # Money columns
+  monetize :budget_cents
+  monetize :ratio_cents
 
   # Associations
   belongs_to :customer
@@ -38,7 +45,10 @@ class Project < ActiveRecord::Base
 
   # Scopes
   scope :trackable, -> { where('tracking_id IS NOT NULL').where('tracking_service IS NOT NULL') }
-  scope :priced, -> { where('ratio IS NOT NULL') }
+  scope :priced, -> { where('ratio_cents IS NOT NULL') }
+
+  # Hooks
+  before_save :set_currencies
 
   def current_time_gap(accomplished_hours)
     a = ending-start
@@ -78,6 +88,11 @@ class Project < ActiveRecord::Base
     projects = Project.active.trackable
     projects.each do |project|
       project.refresh_hours_spent
-    end 
+    end
+  end
+
+  def set_currencies
+    self.budget_currency = self.currency
+    self.ratio_currency = self.currency
   end
 end

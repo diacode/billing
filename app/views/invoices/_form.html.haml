@@ -2,7 +2,9 @@
   .row
     .col-md-6
       = f.association :customer, prompt: 'Select a customer'
-
+  .row
+    .col-md-6
+      = f.input :currency, collection: ['EUR', 'USD'], selected: 'EUR'
   .row
     .col-sm-12
       .form-actions

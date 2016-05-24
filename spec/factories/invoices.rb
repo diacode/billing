@@ -10,6 +10,7 @@
 #  updated_at  :datetime
 #  paid        :boolean          default("false")
 #  customer_id :integer
+#  currency    :string
 #
 # Indexes
 #
@@ -19,5 +20,6 @@
 FactoryGirl.define do
   factory :invoice do
     customer
+    currency 'EUR'
   end
 end

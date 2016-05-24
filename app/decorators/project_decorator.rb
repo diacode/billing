@@ -12,7 +12,7 @@ class ProjectDecorator < Draper::Decorator
 
   def budget
     unless object.budget.blank?
-      number_to_currency(object.budget) 
+      object.budget.format
     else
       "Sin determinar"
     end
@@ -27,7 +27,7 @@ class ProjectDecorator < Draper::Decorator
   end
 
   def ratio
-    "#{number_to_currency(object.ratio)}/hora" unless object.ratio.blank?
+    "#{object.ratio.format}/hora" unless object.ratio.blank?
   end
 
   def days_left

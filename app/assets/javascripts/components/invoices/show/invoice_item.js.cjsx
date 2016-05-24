@@ -1,11 +1,9 @@
 @InvoiceItem = React.createClass
   getInitialState: ->
-    item: {}
-    selectedProject:
-      name: ''
+    # Init state from props
+    item: @props.item
+    selectedProject: @getProjectById(@props.item.project_id)
     editingMode: false
-  componentDidMount: ->
-    @setState item: @props.item, selectedProject: @getProjectById(@props.item.project_id)
   enableEditMode: (e) ->
     @refs.descriptionInput.getDOMNode().value = @state.item.description
     @refs.costInput.getDOMNode().value = @state.item.cost
@@ -90,7 +88,7 @@
         </select>
       </td>
       <td className="cost">
-        <span>{numeral(@state.item.cost).format('0,0[.]00 $')}</span>
+        <span>{I18n.toCurrency(@state.item.cost, unit: @props.currency)}</span>
         <input type="number" ref="costInput" className="form-control cost" onKeyUp={@handleInputsKeyUp} />
       </td>
       <td className="actions">

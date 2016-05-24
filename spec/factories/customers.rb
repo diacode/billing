@@ -15,5 +15,6 @@
 FactoryGirl.define do
   factory :customer do
     name Faker::Name.name
+    language 'es'
   end
 end

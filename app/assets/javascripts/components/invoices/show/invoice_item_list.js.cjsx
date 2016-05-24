@@ -59,7 +59,7 @@
       {
         if @state.items.length > 0
           @state.items.map (item) => 
-            <InvoiceItem key={item.id} item={item} projects={@props.projects} ref={"item_#{item.id}"} />
+            <InvoiceItem key={item.id} item={item} projects={@props.projects} ref={"item_#{item.id}"} currency={@props.currency}/>
         else
           <tr className="no-data-row">
             <td colSpan="4">
