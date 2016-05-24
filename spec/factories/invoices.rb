@@ -20,5 +20,6 @@
 FactoryGirl.define do
   factory :invoice do
     customer
+    currency 'EUR'
   end
 end
