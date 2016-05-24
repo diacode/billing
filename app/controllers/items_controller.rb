@@ -5,14 +5,14 @@ class ItemsController < BaseController
     @invoice = Invoice.find(params[:invoice_id])
     @item = @invoice.items.build(item_params)
     if @item.save
-      respond_with @item, location: nil
+      respond_with ItemSerializer.new(@item), location: nil
     end
   end
 
   def update
     @item = Item.find(params[:id])
     if @item.update_attributes(item_params)
-      render json: @item
+      render json: ItemSerializer.new(@item)
     end
   end
 

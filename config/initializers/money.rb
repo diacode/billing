@@ -1,14 +1,14 @@
 # encoding : utf-8
+require 'money/bank/google_currency'
 
 MoneyRails.configure do |config|
   # To set the default currency
   #
-  config.default_currency = :eur
+  config.default_currency = :EUR
 
   # Set default bank object
-  #
-  # Example:
-  # config.default_bank = EuCentralBank.new
+  config.default_bank = Money::Bank::GoogleCurrency.new
+  Money::Bank::GoogleCurrency.ttl_in_seconds = 86400
 
   # Add exchange rates to current money bank object.
   # (The conversion rate refers to one direction only)

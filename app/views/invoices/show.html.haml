@@ -52,7 +52,7 @@
       .col-md-12
         %h3 Detalle de factura
 
-        = react_component "InvoiceTable", {items: @invoice.items, projects: @projects, invoice_id: @invoice.id, vat: @invoice.vat, paid: @invoice.paid}
+        = react_component "InvoiceTable", react_props_for_invoice_table(@invoice, @projects, @customer)
 
   = render 'period_modal'
   = render 'email_modal'

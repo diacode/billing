@@ -25,5 +25,17 @@ module InvoicesHelper
       false
     end
   end
+
+  def react_props_for_invoice_table(invoice, projects, customer)
+    {
+      items: ActiveModel::ArraySerializer.new(invoice.items, each_serializer: ItemSerializer),
+      projects: projects,
+      invoice_id: invoice.id,
+      vat: invoice.vat,
+      paid: invoice.paid,
+      currency: invoice.currency_symbol,
+      locale: customer.language
+    }
+  end
 end
 

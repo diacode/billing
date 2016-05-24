@@ -48,7 +48,7 @@
                         %td= project.start ? l(project.start.to_date) : "-"
                         %td= project.ending ? l(project.ending.to_date) : "-"
                         %td.number #{project.hours_spent} horas
-                        %td.number= number_to_currency project.invoiced
+                        %td.number= humanized_money_with_symbol project.invoiced
 
                   - else
                     %tr
@@ -59,7 +59,7 @@
                     %tr
                       %td{colspan: 3} Total:
                       %td.number #{@projects.to_a.sum(&:hours_spent)} horas
-                      %td.number= number_to_currency @projects.to_a.sum(&:invoiced)
+                      %td.number= humanized_money_with_symbol @projects.to_a.sum(&:invoiced)
 
         #billing_tab.tab-pane
           .row
@@ -79,7 +79,7 @@
                         %td= link_to invoice.code, invoice
                         %td= l invoice.created_at.to_date
                         %td= invoice.paid ? 'Pagada' : 'Pendiente'
-                        %td.number= number_to_currency invoice.total
+                        %td.number= humanized_money_with_symbol invoice.total
                   - else 
                     %tr
                       %td{colspan: 4} No hay facturas asociadas a este cliente.
@@ -88,4 +88,4 @@
                   %tfoot.total-footer
                     %tr
                       %td{colspan: 3} Total:
-                      %td.number= number_to_currency @invoices.to_a.sum(&:total)
+                      %td.number= humanized_money_with_symbol @invoices.to_a.sum(&:total)

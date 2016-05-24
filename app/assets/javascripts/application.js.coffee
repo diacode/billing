@@ -13,8 +13,8 @@
 #= require pickadate/picker.date
 #= require pickadate/translations/es_ES
 #= require daterangepicker
-#= require numeral
-#= require numeral-lang/es-ES
+#= require i18n
+#= require i18n/translations
 #= require d3
 #= require showdown
 

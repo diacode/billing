@@ -1,7 +1,6 @@
 class Smithers.Views.Invoices.ShowView extends Smithers.Views.ApplicationView
   constructor: ->
     super()
-    numeral.language('es')
     @periodModal = $('#period_modal')
     @emailModal = $('#email_modal')
     @invoiceId = $('#invoice_id').val()

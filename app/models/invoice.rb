@@ -38,15 +38,15 @@ class Invoice < ActiveRecord::Base
 
   # Public methods
   def subtotal
-    items.sum(:cost_cents)/100
+    Money.new(items.sum(:cost_cents), currency)
   end
 
   def vat_fee
-    subtotal*self.vat.to_f/100.0
+    subtotal * vat.to_f / 100
   end
 
   def total
-    subtotal+vat_fee
+    subtotal + vat_fee
   end
 
   def to_s
@@ -55,6 +55,10 @@ class Invoice < ActiveRecord::Base
 
   def expired?
     !expiration.blank? && expiration < Date.today
+  end
+
+  def currency_symbol
+    Money::Currency.new(currency).symbol
   end
 
   private
