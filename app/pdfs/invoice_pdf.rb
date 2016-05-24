@@ -6,7 +6,7 @@ class InvoicePdf < Prawn::Document
   def initialize(invoice)
     super()
     @invoice = invoice
-    @currency = @invoice.currency_symbollo
+    @currency = @invoice.currency_symbol
     @predefined_text = ::BillingConfig['invoice']
 
     I18n.with_locale(@invoice.customer.language) do
