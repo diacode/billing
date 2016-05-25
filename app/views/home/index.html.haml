@@ -17,7 +17,7 @@
             = number_to_currency @monthly_income
             - if @pending > 0
               .pending{title: 'Pendiente de cobro'} 
-                + #{number_to_currency(@pending)}
+                + #{humanized_money_with_symbol(@pending)}
       .col-md-4
         #expenses
           %h3 Gastos del mes
@@ -65,7 +65,7 @@
                       %td= invoice.customer.name
                       %td= l(invoice.created_at.to_date, format: :short)
                       %td= l(invoice.expiration, format: :short) if invoice.expiration
-                      %td.amount= number_to_currency invoice.total
+                      %td.amount= humanized_money_with_symbol invoice.total
                 - else
                   %tr
                     %td{colspan: 6} No se encontraron facturas
