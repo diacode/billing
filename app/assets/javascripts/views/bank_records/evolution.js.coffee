@@ -140,7 +140,7 @@ class Smithers.Views.BankRecords.EvolutionView extends Smithers.Views.Applicatio
       return
 
   showTooltip: (data) ->
-    amount = numeral(data.balance).format('0,0[.]00 $')
+    amount = data.balance
     formatted_date = moment(data.date).format('L')
 
     @tooltip.html("

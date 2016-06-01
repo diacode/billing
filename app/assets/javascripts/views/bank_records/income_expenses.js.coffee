@@ -141,7 +141,7 @@ class Smithers.Views.BankRecords.IncomeExpensesView extends Smithers.Views.Appli
 
   showTooltip: (data, x, y) ->
     recordType = if data.name is 'income' then 'Ingresos' else 'Gastos'
-    amount = numeral(data.value).format('0,0[.]00 $')
+    amount = data.value
     
     @tooltip.html("#{recordType}:<br/><strong>#{amount}</strong>")
     @tooltip.style("top", (y - 10) + "px").style "left", (x + 10) + "px"
