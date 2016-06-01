@@ -21,7 +21,7 @@
 #
 
 class Item < ActiveRecord::Base
-  monetize :cost_cents
+  monetize :cost_cents, with_model_currency: :cost_currency
 
   # Associations
   belongs_to :invoice

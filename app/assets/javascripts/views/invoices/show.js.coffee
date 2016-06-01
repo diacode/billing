@@ -103,13 +103,13 @@ class Smithers.Views.Invoices.ShowView extends Smithers.Views.ApplicationView
     @periodModal.find(".tracked-time-value").text("#{response.accomplished_hours} horas")
     ratio = parseInt @periodModal.find(".ratio").text()
     cost = ratio*response.accomplished_hours
-    @periodModal.find('#total_cost h2').text cost
+    @periodModal.find('#total_cost h2').text I18n.toNumber(cost, precision: 2)
 
     # Setting data in the form
     a = @periodModal.find('#period_from').pickadate('picker').get('select').obj
     b = @periodModal.find('#period_until').pickadate('picker').get('select').obj
     
-    @periodModal.find("#item_cost").val(cost)
+    @periodModal.find("#item_cost").val(I18n.toNumber(cost, precision: 2))
     @periodModal.find("#item_hours").val(response.accomplished_hours)
     @periodModal.find("#item_period_start").val(a)
     @periodModal.find("#item_period_end").val(b)    
