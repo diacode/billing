@@ -3,16 +3,20 @@ class ItemsController < BaseController
 
   def create
     @invoice = Invoice.find(params[:invoice_id])
-    @item = @invoice.items.build(item_params)
-    if @item.save
-      respond_with ItemSerializer.new(@item), location: nil
+    I18n.with_locale(@invoice.customer.language) do
+      @item = @invoice.items.build(item_params)
+      if @item.save
+        respond_with ItemSerializer.new(@item), location: nil
+      end
     end
   end
 
   def update
     @item = Item.find(params[:id])
-    if @item.update_attributes(item_params)
-      render json: ItemSerializer.new(@item)
+    I18n.with_locale(@item.invoice.customer.language) do
+      if @item.update_attributes(item_params)
+        render json: ItemSerializer.new(@item)
+      end
     end
   end
 

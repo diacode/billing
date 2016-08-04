@@ -89,7 +89,7 @@
       </td>
       <td className="cost">
         <span>{I18n.toCurrency(@state.item.cost, unit: @props.currency)}</span>
-        <input type="number" ref="costInput" className="form-control cost" onKeyUp={@handleInputsKeyUp} />
+        <input type="text" ref="costInput" className="form-control cost" onKeyUp={@handleInputsKeyUp} />
       </td>
       <td className="actions">
         <a onClick={@enableEditMode} className="edit-item">Editar</a>
